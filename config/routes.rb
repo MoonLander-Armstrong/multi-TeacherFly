@@ -1,3 +1,83 @@
+# frozen_string_literal: true
+require "constraints/subdomain"
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  constraints(Subdomain) do
+    scope module: "tenant" do
+      root to: "courses#index", as: "teacher_root"
+      devise_for :students
+
+      # back stage
+      namespace :owner do
+        resources :lecturers
+        resources :courses do
+          member do
+            get :information
+            get :curriculum
+            get :comments
+          end
+          resources :chapters do
+            resources :sections, only: [:new, :create]
+            collection do
+              resources :sections, except: [:new, :create] do
+                resources :comments, shallow: true, only: [:create, :destroy]
+              end
+            end
+          end
+        end
+        resources :users, only: [:index, :update] do
+          member do
+            get :information
+          end
+        end
+      end
+
+      # front stage
+      resources :lecturers, only: [:show]
+      resources :courses, only: %i[index show]do
+        resources :orders, only: [] do
+          collection do
+            get :payment
+          end
+        end
+        resources :sections, only: %i[show] do
+          resources :comments, shallow: true, only: [:create, :destroy]
+        end
+      end
+
+      resources :orders, only: [:index, :show] do
+        collection do
+          post :payment_response
+        end
+      end
+    end
+
+    # API
+    namespace :api do
+      namespace :v1 do
+        resources :comments, only: [] do
+          member do
+            post :reply
+          end
+        end
+
+        resources :courses, only: [] do
+          resources :sections, only: [] do
+            member do
+              patch :finished
+            end
+          end
+        end
+      end
+    end
+  end
+
+  root to: 'pages#home'
+  devise_for :teachers, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  # back stage
+  namespace :owner do
+    resources :schools, only: [:index, :create, :update, :destroy] do
+    end
+  end
 end
