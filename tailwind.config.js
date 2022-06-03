@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   purge: [
     "./app/**/*.html.erb",
@@ -6,6 +8,10 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      xs: "440px",
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         primary: {

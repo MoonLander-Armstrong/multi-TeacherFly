@@ -21,6 +21,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="fixed z-50 w-full shadow-md header bg-secondary-400 text-primary-100">
+      <%= render "shared/tenant_nav" %>
+    </header>
+    <main class="main">
+      <%= yield %>
+    </main>
+    <footer class="w-full footer bg-primary-300">
+      <%= render "shared/footer"%>
+    </footer>
   </body>
 </html>

@@ -116,13 +116,10 @@ textarea {
 
 // front stage common style
 .header {
-  height: 88px;
-  // overflow: hidden;
-  transition: height 0.15s linear;
 }
 
 .main {
-  padding-top: 88px;
+  @apply pt-16;
   min-height: 60vh;
 }
 

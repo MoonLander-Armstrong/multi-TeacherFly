@@ -2,6 +2,9 @@
   height: 40px;
   margin-top: 30px;
   margin-bottom: 5px;
+  i:hover {
+    @apply hover:text-secondary-400;
+  }
 }
 .logo-icon {
   width: 430px;
@@ -36,9 +39,6 @@
 }
 .icon {
   @apply flex justify-around text-3xl text-rice;
-}
-i:hover {
-  @apply hover:text-secondary-400;
 }
 
 .talk-us {

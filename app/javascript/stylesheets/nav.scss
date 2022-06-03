@@ -1,11 +1,26 @@
-.logo {
-  height: 88px;
-}
+.home-nav {
+  .logo {
+    @apply h-16 mx-auto sm:ml-0 sm:pl-4;
+  }
 
-.login-area {
-  @apply items-center;
+  .login-area {
+    @apply text-center;
 
-  a {
-    @apply block w-full py-4 md:px-8 md:py-8 hover:underline hover:bg-primary-200 hover:text-primary-600 transition;
+    a {
+      line-height: 4rem;
+      @apply block h-16 px-4 bg-primary-200 hover:bg-primary-300 sm:bg-primary-300 sm:hover:bg-primary-200 text-primary-600 hover:text-white sm:text-white sm:hover:text-primary-600 transition;
+    }
+  }
+
+  .fade {
+    @apply overflow-hidden transition-all ease-linear duration-200;
+  }
+
+  .fade-out {
+    @apply h-0;
+  }
+
+  .fade-in {
+    @apply h-32;
   }
 }

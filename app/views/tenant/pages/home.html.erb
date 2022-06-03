@@ -1,9 +1,1 @@
 <h1 class="text-6xl">有subdomain</h1>
-
-<% if current_student %>
-  <li><%= link_to('修改密碼', edit_registration_path(:student)) %></li>
-  <li><%= link_to('登出', destroy_student_session_path, :method => :delete) %></li>
-<% else %>
-  <li><%= link_to('註冊', new_registration_path(:student)) %></li>
-  <li><%= link_to('登入', new_session_path(:student)) %></li>
-<% end %>
