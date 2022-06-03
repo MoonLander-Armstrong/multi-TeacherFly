@@ -1,0 +1,88 @@
+.course-card {
+  @apply flex flex-col w-full mx-auto shadow rounded overflow-hidden shadow-lg transition;
+}
+
+.course-card-hover:hover {
+  @apply transform -translate-x-1 -translate-y-1 transition duration-300;
+}
+
+.course-card-hover:hover h2 {
+  @apply text-primary-200;
+}
+
+.course-card-hover h2 {
+  @apply transition;
+}
+
+.course-card-image {
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+.course-card-image img {
+  aspect-ratio: 16/9;
+}
+
+.course-card-image div {
+  @apply absolute inset-0 flex justify-center items-center text-xl tracking-widest text-white bg-gray-500;
+}
+
+.course-card-main {
+  @apply flex-grow;
+}
+
+// 講師選單
+.drop {
+  position: relative;
+  display: block;
+}
+.dropOption {
+  position: relative;
+  color: #666;
+  font-size: 15px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 12px;
+    border-width: 8px 6px;
+    border-style: solid;
+    border-color: #999 transparent transparent transparent;
+  }
+}
+.dropdown {
+  position: absolute;
+  color: #333;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 3px 0px #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 10;
+  > li {
+    display: block;
+    color: #000;
+    padding: 12px;
+    font-size: 15px;
+    margin: 0 10px;
+    &:first-child {
+      margin-top: 10px;
+    }
+    &:last-child {
+      margin-bottom: 10px;
+    }
+    &:hover {
+      border-radius: 6px;
+      @apply bg-secondary-300
+    }
+    a {
+      display: block;
+    }
+  }
+}

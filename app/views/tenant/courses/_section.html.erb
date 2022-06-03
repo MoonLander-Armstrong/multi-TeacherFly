@@ -1,0 +1,5 @@
+<li class="sections">
+  <%= link_to course_section_path(@course, section), class: "block py-3" do %>
+    <span class="text-xs px-2 py-px mr-3 border-2 border-warning-200 rounded-md"><i class="fa-solid fa-play text-warning-200"></i></span><%= section.title %>
+  <% end %>
+</li>

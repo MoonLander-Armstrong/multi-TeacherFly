@@ -1,0 +1,4 @@
+<ul>
+  <li class="bg-gray-300"><%= chapter.title %></li>
+  <%= render partial: "section" , collection: chapter.sections.published, locals: { course: course } %>
+</ul>

@@ -1,0 +1,9 @@
+<li class="text-xl bg-gray-200 hover:bg-secondary-200">
+  <%= link_to course_section_path(section.course, section), class: "flex items-center px-8 py-3" do %>
+    <div>
+      <i class="fa-solid fa-book"></i>
+      <%= section.title %>
+    </div>
+    <span class="block px-3 py-1 ml-auto text-sm text-white bg-warning-200 hover:bg-warning-100 rounded-md">開始</span>
+  <% end %>
+</li>

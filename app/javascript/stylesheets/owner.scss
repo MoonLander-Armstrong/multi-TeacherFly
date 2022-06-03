@@ -1,0 +1,87 @@
+.owner-main {
+  flex-grow: 1;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.owner-main-container {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1rem;
+    @apply bg-secondary-400;
+  }
+
+  form {
+    input {
+      @apply m-0 text-primary-300;
+    }
+
+    textarea {
+      @apply w-full h-40 p-2 text-primary-300 border-primary-300;
+    }
+
+    select {
+      @apply w-full px-3 py-1 bg-gray-50 rounded-md border border-primary-300 text-primary-300 focus:border-primary-300 appearance-none;
+    }
+
+    .owner-course-btn {
+      @apply px-4 py-2 my-auto bg-primary-300 text-white rounded hover:bg-primary-400;
+    }
+  }
+}
+
+.owner-course-btn {
+  @apply px-4 py-2 my-auto bg-primary-300 text-white rounded hover:bg-primary-400;
+}
+
+.owner-list {
+  @apply w-full h-full px-4 py-10 m-auto bg-gradient-to-tl;
+}
+
+.owner-title {
+  @apply flex justify-between w-full mb-11;
+}
+
+.owner-table {
+  @apply w-full table-auto min-w-max;
+}
+
+.owner-thead {
+  @apply text-primary-300 bg-primary-100 border-b border-primary-300;
+}
+
+.owner-text {
+  @apply px-6 py-3 font-bold;
+}
+
+.owner-tbody {
+  @apply text-sm text-black bg-white;
+}
+
+.comment-table {
+
+}
+
+.tag {
+  @apply px-3 py-2 text-sm rounded-full;
+}
+
+.tag-publish {
+  @apply text-white bg-rice;
+}
+
+.tag-draft {
+  @apply text-white bg-draft;
+}
+
+.tag-safe {
+  @apply text-white bg-safe;
+}
+
+.owner-chapter-btn {
+  @apply px-2 py-1 my-auto bg-primary-300 text-white rounded hover:bg-primary-400;
+}

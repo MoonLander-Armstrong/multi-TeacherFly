@@ -1,0 +1,45 @@
+<div class="relative min-h-screen pt-10 owner-main-container">
+  <div class="w-11/12 mx-auto">
+  <%= form_with model: @course, url: owner_courses_path do |form| %>
+    <div class="flex items-center justify-between">
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">新增課程</h1>
+      <div>
+        <%= form.submit "+ 新增課程", class: "owner-course-btn" %>
+      </div>  
+    </div>
+    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded">
+      <div class="flex items-center mb-4">
+        <%= form.label :image, "課程圖片", class: "flex-shrink-0 mr-4" %>
+        <%= form.file_field :image %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.label :title, "課程標題", class: "flex-shrink-0 mr-4" %>
+        <%= form.text_field :title %>
+      </div>
+      <div class="md:flex">
+        <div class="flex items-center mb-4 md:w-1/2 md:mr-2">
+          <%= form.label :description, "課程簡介", class: "flex-shrink-0 mr-4" %>
+          <%= form.text_area :description %>
+        </div>
+        <div class="flex flex-wrap md:w-1/2 md:ml-2">
+          <div class="flex items-center w-full mb-4">
+            <%= form.label :published, "課程狀態", class: "flex-shrink-0 mr-4" %>
+            <%= form.select :published, options_for_select(Section.published_state),{include_blank: "選擇您的課程狀態"} %>
+          </div>
+          <div class="flex items-center w-full mb-4">
+            <%= form.label :lecturer_id, "課程講師", class: "flex-shrink-0 mr-4" %>
+            <%= form.select :lecturer_id, Lecturer.pluck(:name, :id),{include_blank: "選擇您的講師" } %>
+          </div>
+          <div class="flex items-center w-full mb-4">
+            <%= form.label :price, "課程售價", class: "flex-shrink-0 mr-4" %>
+            <%= form.number_field :price, placeholder: "輸入您的課程售價", class: "placeholder-primary-300" %>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center mb-4">
+          <%= form.label :content, "課程介紹", class: "flex-shrink-0 mr-4" %>
+          <%= form.text_area :content, data: { controller: "markdown-editor" } %>
+        </div>
+    </div>
+  <% end %>
+</div>

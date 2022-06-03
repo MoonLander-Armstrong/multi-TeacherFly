@@ -1,0 +1,22 @@
+<article data-controller="ajaxForm">
+  <div class="md:flex">
+    <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
+      <%= image_tag url_for(comment.user.avatar), class: "w-full h-full object-cover" if comment.user.avatar.attached? %>
+    </div>
+    
+    <div class="comments <%= @course.user == comment.user ? "comment-owner" : "comment-student" %>">
+      <div class="flex items-center justify-between mb-4 text-primary-300">
+        <h3><%= comment.user.username %></h3>
+        <button class="p-1 text-xl" data-action="click->ajaxForm#toggle"><i class="fa-solid fa-comment-dots"></i></button>
+      </div>
+      <p class="p-4"><%= comment.content %></p>
+      <div class="hidden pt-4 border-t border-gray-300 comment" data-ajaxForm-target="form">  
+      <%= render partial: "comments/form", locals: { course: @course, section: @section, parent: comment }%>
+    </div>
+    </div>
+  </div>
+  
+  <div class="comment" id="comment_<%= comment.id %>">
+    <%= render comment.comments.order(id: :desc) %>
+  </div>
+</article>

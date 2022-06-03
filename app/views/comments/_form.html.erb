@@ -1,0 +1,18 @@
+<%= form_with(url: course_section_comments_path(course, section), scope: "comment", data: { remote: true }) do |form|%>
+  <% if !parent.nil? %>
+    <input type="hidden" name=comment[parent_id] value="<%= parent.id %>">
+  <% end %>
+
+  <div class="mb-6 md:flex">
+    <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
+      <%= image_tag url_for(current_user.avatar), class: "w-full h-full object-cover" if current_user.avatar.attached? %>
+    </div>
+    <div class="relative flex-grow p-4 comment-triangle md:ml-4 bg-secondary-100">
+      <h3 class="mb-4 text-primary-300"><%= current_user.username %></h3>
+      <%= form.text_area :content , class: "w-full h-32 p-2 mb-2 md:mb-4", data: { ajaxForm_target: "input"}, placeholder: "在此輸入留言" %>
+      <div class="flex">
+        <%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "px-6 py-1 md:py-2 ml-auto text-white bg-primary-300 rounded-md hover:bg-primary-200 focus:bg-primary-300" %>
+      </div>
+    </div>
+  </div>
+<% end %>

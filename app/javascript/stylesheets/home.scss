@@ -1,0 +1,32 @@
+.banner-bg::before {
+  content: "";
+  @apply absolute z-20 inset-x-0 top-0 h-4 bg-secondary-400;
+}
+
+.banner-gradient {
+  background: linear-gradient(to top, #00000066 30%, transparent);
+}
+
+.home-information {
+  & > div:nth-child(2n) > div {
+    @apply flex-row-reverse;
+
+    .home-information-img {
+      border-bottom-right-radius: 30% 50%;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
+.home-information-img {
+  aspect-ratio: 3/2;
+  border-top-left-radius: 30% 50%;
+  border-top-right-radius: 30% 50%;
+  border-bottom-left-radius: 30% 50%;
+}
+
+@media screen and (min-width: 768px) {
+  .banner-gradient {
+    background: linear-gradient(to right, rgba(0 ,0, 0, .6), transparent);
+  }
+}

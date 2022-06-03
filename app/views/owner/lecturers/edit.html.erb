@@ -1,0 +1,56 @@
+<%= content_for :lecturer do %>
+  <ul class="sidebar-list">
+    <li>
+      <%= link_to edit_owner_lecturer_path(@lecturer) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>講師資訊
+      <% end %>
+    </li>
+  </ul>
+<% end %>
+
+<div class="relative min-h-screen pt-10 owner-main-container">
+  <div class="w-11/12 mx-auto">
+  <%= form_with(model: @lecturer, url: owner_lecturer_path) do |form| %>
+    <div class="flex items-center justify-between">
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">編輯講師</h1>
+      <div>
+        <%= form.button class: "owner-course-btn" do %>
+          <i class="mr-4 fa-solid fa-arrow-rotate-right"></i>更新講師
+        <% end %>
+      </div>  
+    </div>
+    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded lg:flex lg:justify-evenly">
+      <div class="lg:mr-4">
+        <div class="w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full field tt" data-controller="avatar-label">
+          <%= form.label :mugshot, class: "avatar-label relative block w-40 h-40 rounded-full overflow-hidden cursor-pointer" do %>
+            <div class="absolute inset-0 w-40 h-40 mx-auto text-white">
+              <% if @lecturer.mugshot.attached? %>
+                <%= image_tag url_for(@lecturer.mugshot), class: "w-40 h-40 object-cover", data: { avatar_label_target: "preview" } %>
+              <% else %>
+                <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-avatar-label-target="fakeImg">
+                  <i class="text-6xl fa-solid fa-user"></i>
+                </div>
+                <img class="hidden object-cover w-40 h-40" data-avatar-label-target="preview">
+              <% end %>
+            </div>
+          <% end %>
+          <%= form.file_field :mugshot, class: "hidden", data: { action: "change->avatar-label#loadImg", avatar_label_target: "fileInput" } %>
+        </div>
+        <div>
+          <div class="flex items-center mb-4">
+            <%= form.label :name, "講師姓名", class: "flex-shrink-0 mr-4" %>
+            <%= form.text_field :name, placeholder: "姓名（必填）" %>
+          </div>
+          <div class="flex items-center mb-4">
+            <%= form.label :nickname, "講師別名", class: "flex-shrink-0 mr-4" %>
+            <%= form.text_field :nickname, placeholder: "別名（必填)" %>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center lg:block">
+        <%= form.label :content, "講師介紹", class: "flex-shrink-0 mr-4" %>
+        <%= form.text_area :content, data: { controller: "markdown-editor" }  %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,21 @@
+<div class="container flex justify-between p-1 mx-auto mt-12" data-controller="search">
+  <div class="w-1/3 ml-5 drop" data-action="click->search#showOption">
+    <div class="w-full dropOption" data-search-target="button">選擇講師</div>
+    <ul class="invisible w-full dropdown" data-search-target="option">
+    <% @lecturers.each do |lecturer|%>
+      <li>
+        <a><%= link_to lecturer.name, lecturer_path(lecturer) %></a>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  
+  <div class="flex w-1/3 simple-search">
+    <div class="self-center mx-3 text-lg whitespace-nowrap">課程搜尋</div>
+    <div class="self-center w-full mr-5">
+      <%= form_tag courses_path, method: :get, data: { controller: "simple-search" } do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "self-center my-auto p-2.5 text-base", data: { action: "focus->simple-search#clearSearchInput" } %>
+      <% end %>
+    </div>
+  </div>
+</div>

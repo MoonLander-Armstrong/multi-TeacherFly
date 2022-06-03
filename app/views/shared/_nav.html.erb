@@ -1,0 +1,17 @@
+<nav class="md:container flex pr-4 md:mx-auto">
+    <%= link_to root_path, class: "logo mr-auto pt-2" do %>
+      <%= image_tag "logo", class:"h-full" %>
+    <% end %>
+    <button class="ml-auto">
+      <% if current_teacher && current_teacher.avatar.attached? %>
+        <div class="w-12 h-12 overflow-hidden rounded-full">
+          <%= image_tag url_for(teacher.avatar) %>
+        </div>
+      <% else %>
+        <div class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full">
+          <i class="fa-solid fa-user"></i>
+        </div>
+      <% end %>
+    </button>
+  
+</nav>

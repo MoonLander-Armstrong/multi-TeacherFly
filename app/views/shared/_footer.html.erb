@@ -1,0 +1,91 @@
+<footer class="relative overflow-hidden">
+  <div class="flex items-center justify-center footer-logo">
+    <%= image_tag "logo", class: "h-full"%>
+  </div>
+  <div class="justify-center md:flex">
+    <div class="flex-row-reverse md:flex md:w-1/3">
+      <div class="invisible logo-icon md:visible">
+        <%= image_tag "logo-icon"%>
+      </div>
+      <div class="md:w-1/3 prodect-card md:pr-10">
+        <div class="flex justify-center sm:w-full">
+          <h4 class="text-rice product">產品功能</h4>
+        </div>
+        <div>
+          <ul class="mt-3 text-center text-rice">
+            <li>會員系統</li>
+            <li>第三方登入</li>
+            <li>藍新金流</li>
+            <li>留言板功能</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <section class="flex m-auto my-5 md:w-1/3 justify-evenly designer-card">
+      <div class="designer">
+        <div class="flex items-center justify-center w-16 h-16 m-auto overflow-hidden bg-gray-300 rounded-full designer-mugshot">
+          <%= image_tag "member/wang.jpg" %>
+        </div>
+        <label class="name">王孝先</label>
+        <div class="icon">
+          <%= link_to "https://github.com/s8854198" do %>
+            <i class="fa-brands fa-github-square"></i>
+          <% end %>
+          <%= mail_to "ben2021345@gmail.com" do %>
+            <i class="fa-solid fa-square-envelope"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="designer">
+        <div class="flex items-center justify-center w-16 h-16 m-auto overflow-hidden bg-gray-300 rounded-full designer-mugshot">
+          <%= image_tag "member/ann.jpg" %>
+        </div>
+        <label class="name">詹濟安</label>
+        <div class="icon">
+          <%= link_to "https://github.com/zhanjian0217" do %>
+            <i class="fa-brands fa-github-square"></i>
+          <% end %>
+          <%= mail_to "gian910147@gmail.com" do %>
+            <i class="fa-solid fa-square-envelope"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="designer">
+        <div class="flex items-center justify-center w-16 h-16 m-auto overflow-hidden bg-gray-300 rounded-full designer-mugshot">
+          <%= image_tag "member/pei.jpg" %>
+        </div>
+        <label class="name">林沛萱</label>
+        <div class="icon">
+          <%= link_to "https://github.com/PeiHsuan0416" do %>
+            <i class="fa-brands fa-github-square"></i>
+          <% end %>
+          <%= mail_to "lalalahsuan@gmail.com" do %>
+            <i class="fa-solid fa-square-envelope"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="designer">
+        <div class="flex items-center justify-center w-16 h-16 m-auto overflow-hidden bg-gray-300 rounded-full designer-mugshot">
+          <%= image_tag "member/willian.jpg" %>
+        </div>
+        <label class="name">閻緯濂</label>
+        <div class="icon">
+          <%= link_to "https://github.com/williamyen96630" do %>
+            <i class="fa-brands fa-github-square"></i>
+          <% end %>
+          <%= mail_to "williamyen47@gmail.com" do %>
+            <i class="fa-solid fa-square-envelope"></i>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <div class="m-auto md:w-1/3 md:px-10 talk-us" data-controller="talk">
+      <label class="text-xl text-secondary-300 mt-0.5">想對我們說的話....</label>
+      <p class="text-rice mt-0.5">我們是群新手工程師，期待您給我們鼓勵與意見，讓我們變得更好更強大...</p>
+      <textarea cols="30" rows="5" class="mt-2 talk-area" data-talk-target="opinion">留下您寶貴的意見：）</textarea>
+      <div class="flex flex-row-reverse">
+        <button class="px-8 py-1 rounded text-secondary-500 hover:text-white bg-secondary-300 hover:bg-secondary-400" data-action="click->talk#fight">加油</button>
+      </div>
+    </div>
+  </div>
+</footer>

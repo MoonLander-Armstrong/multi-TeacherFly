@@ -1,0 +1,18 @@
+<li class="relative flex bg-gray-100 hover:bg-primary-200 transition" data-controller="finished-list" data-course-id=<%= course.friendly_id %> data-section-id=<%= section.id %> data-section-slug-id=<%= section.friendly_id %>>
+  <% if current_user.bought?(@course) %>
+    <label for="<%= section.friendly_id %>" class="absolute inset-y-0 flex items-center pl-2 cursor-pointer">
+      <i class="fa-solid fa-circle-check <%= "hidden" unless current_user.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="finishedIcon"></i>
+      <span class="bg-white w-4 h-4 border-2 border-black rounded-full <%= "hidden" if current_user.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="unfinishedIcon"></span>
+      <input type="checkbox" class="hidden" id="<%= section.friendly_id %>" <%= "checked" if current_user.reads.to_read_sections(section).pluck(:finished)[0] %> data-action="change->finished-list#toggleFinished">
+    </label>
+  <% else %>
+    <div class="absolute inset-y-0 flex items-center pl-2 cursor-pointer">
+      <span class="w-4 h-4 bg-white border-2 border-black rounded-full"></span>
+    </div>
+  <% end %>
+  <%= link_to course_section_path(@course, section), class: "flex flex-grow items-center pl-4 py-3  transition" do %>
+    <div class="ml-4">
+      <i class="mr-2 fa-solid fa-book"></i><%= section.title %>
+    </div>
+  <% end %>
+</li>

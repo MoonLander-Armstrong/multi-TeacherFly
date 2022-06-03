@@ -1,0 +1,93 @@
+// teacher-view
+.teacher-member {
+  &::before {
+    content: "";
+    @apply absolute inset-x-0 bottom-0 h-4 bg-secondary-400;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    @apply w-full pl-3 py-1 mt-1 mb-3 border bg-gray-50 border-gray-500 rounded;
+
+    &:focus {
+      @apply border-secondary-400 outline-none ring-2 ring-secondary-400;
+    }
+  }
+
+  input[type="checkbox"] {
+    accent-color: #f9c04b;
+    @apply w-auto mr-4;
+  }
+
+  input[type="submit"] {
+    @apply w-full py-1 mt-1 mb-3 border-none bg-secondary-400 rounded;
+
+    &:hover {
+      @apply bg-secondary-200 ring-offset-secondary-400 ring-offset-1 cursor-pointer;
+    }
+
+    &:focus {
+      @apply ring-offset-secondary-400;
+    }
+
+    &:active {
+      @apply border-none ring-offset-secondary-400;
+    }
+  }
+}
+
+.teacher-member-form {
+  box-shadow: 0 0 5px 2px #fbd588;
+  @apply px-4 py-8 mx-auto rounded-lg sm:w-2/3 lg:w-2/5;
+}
+
+.teacher-member-form-title {
+  @apply mb-6 text-2xl font-extrabold text-center leading-6 text-gray-800;
+}
+
+.teacher-form-link {
+  @apply flex justify-center items-center px-3 py-2 my-2 text-center rounded-md;
+}
+
+.teacher-form-link-self {
+  @apply bg-secondary-400;
+
+  &:hover {
+    @apply bg-secondary-400;
+  }
+}
+
+.teacher-form-link-google {
+  @apply bg-gray-50 border border-gray-200;
+
+  &:hover {
+    @apply bg-gray-200;
+  }
+}
+
+.member-footer {
+  @apply flex items-center mt-4 text-sm italic text-gray-400 tracking-widest;
+
+  &::before {
+    content: "";
+    flex-grow: 1;
+    margin-right: 16px;
+    border-top: 1px rgba(156, 163, 175, var(--tw-text-opacity)) solid;
+  }
+
+  &::after {
+    content: "";
+    flex-grow: 1;
+    margin-left: 16px;
+    border-top: 1px rgba(156, 163, 175, var(--tw-text-opacity)) solid;
+  }
+}
+
+.login {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10;
+}
+
+.google {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10;
+}

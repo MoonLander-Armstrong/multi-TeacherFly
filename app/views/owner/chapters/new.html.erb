@@ -1,0 +1,37 @@
+<%= content_for :course do %>
+  <ul class="sidebar-list">
+    <li>
+      <%= link_to information_owner_course_path(@course) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>課程內容
+      <% end %>
+    </li>
+    <li>
+      <%= link_to curriculum_owner_course_path(@course) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>章節內容
+      <% end %>
+    </li>
+    <li>
+      <%= link_to "#" do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>留言管理
+      <% end %>
+    </li>
+  </ul>
+<% end %>
+
+<div class="owner-main-container relative pt-10 min-h-screen">
+  <div class="w-11/12 mx-auto">
+  <%= form_with model: @chapter, url: owner_course_chapters_path(@course) do |form| %>
+    <div class="flex justify-between items-center">
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">新增章節</h1>
+      <div>
+        <%= form.submit "+ 新增章節", class: "owner-course-btn" %>
+      </div>  
+    </div>
+    <div class="p-8 border-2 bg-white border-gray-300 border-dashed rounded">
+      <div class="flex items-center mb-4">
+        <%= form.label :title, "標題", class: "flex-shrink-0 mr-4" %>
+        <%= form.text_field :title, maxlength: 20 %>
+      </div>
+    </div>
+  <% end %>
+</div>

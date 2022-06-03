@@ -1,0 +1,52 @@
+.footer-logo {
+  height: 40px;
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+.logo-icon {
+  width: 430px;
+  object-fit: cover;
+  position: absolute;
+  top: -25px;
+  right: 76%;
+}
+
+.product {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.product::after {
+  content: " ";
+  width: 120px;
+  height: 2px;
+  position: absolute;
+  bottom: -5px;
+  @apply bg-rice;
+}
+
+.designer-card {
+  width: 90%;
+}
+.designer {
+  @apply text-white;
+}
+.name {
+  @apply flex justify-center;
+}
+.icon {
+  @apply flex justify-around text-3xl text-rice;
+}
+i:hover {
+  @apply hover:text-secondary-400;
+}
+
+.talk-us {
+  width: 80%;
+  margin-bottom: 30px;
+}
+.talk-area {
+  width: 100%;
+  padding: 10px;
+  @apply border border-secondary-300;
+}

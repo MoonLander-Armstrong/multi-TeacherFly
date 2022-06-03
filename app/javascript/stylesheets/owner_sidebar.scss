@@ -1,0 +1,40 @@
+.owner_sidebar {
+  @apply flex-shrink-0 md:w-64 bg-primary-300 text-white;
+
+  .sidebar-list {
+    & .sidebar-list {
+      li {
+        &:last-child {
+          @apply border-b border-gray-300;
+        }
+        a {
+          @apply block pl-12 py-3 hover:bg-primary-100  hover:text-primary-300 transition-colors duration-200 rounded-md;
+        }
+      }
+    }
+
+    li {
+      a {
+        @apply block pl-6 py-3 text-lg hover:bg-primary-100  hover:text-primary-300 transition-colors duration-200 rounded-md;
+
+        i {
+          @apply mr-4;
+        }
+      }
+    }
+  }
+}
+
+.owner-logo {
+  @apply overflow-y-scroll hover:bg-gray-700 hover:bg-opacity-25 transition-colors duration-200;
+
+  a {
+    @apply block px-3 py-6 text-2xl font-semibold;
+  }
+}
+
+#hamburger {
+  &:checked + ul {
+    left: 0;
+  }
+}

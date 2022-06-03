@@ -1,0 +1,7 @@
+    <button data-controller="section-hamburger" class="ml-auto -mr-6">
+      <div class="w-10 h-10 p-0 mx-auto overflow-hidden rounded-full" data-action="click->section-hamburger#hiddenHamburger">
+        <%= image_tag "member/ann.jpg" %>
+      </div>
+    <# <ul class="absolute right-0 overflow-hidden border-2 rounded-md top-full bg-primary-300 hover:bg-primary-200 mobile-list border-primary-400" data-section-hamburger-target="hamburgerButton"> %>
+      <li><%= link_to "編輯會員資料", "#" %></li>
+      <li class="border-t border-primary-600"><%= link_to "登出", destroy_user_session_path, method: :delete %></li>

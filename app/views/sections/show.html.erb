@@ -1,0 +1,104 @@
+<%= content_for :header do %>
+  <div class="flex justify-between flex-grow text-xl text-white section_header">
+    <div class="flex items-center">
+      <div>
+        <%= link_to courses_path, class: "section_header_btn" do %>
+          <i class="fa-solid fa-house"></i>
+        <% end %>
+      </div>
+      <div class="border-l border-white md:hidden">
+        <button class="section_header_btn" data-action="click->section-list#toggleSideBar">
+          <i class="fa-solid fa-list"></i>
+        </button>
+      </div>
+    </div>
+    <div class="flex items-center mr-2 md:hidden">
+      <% unless @course.all_published_sections.first == @section %>
+        <%= link_to course_section_path(@course, @section.prev_section), class: "px-6 py-0.5 mr-2 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
+          <i class="mr-2 fa-solid fa-chevron-left"></i>
+        <% end %>
+      <% end %>
+      <% unless @course.all_published_sections.last == @section %>
+        <%= link_to course_section_path(@course, @section.next_section), class: "px-6 py-0.5 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
+          <i class="ml-2 fa-solid fa-chevron-right"></i>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="items-center hidden mr-2 md:flex">      
+      <% unless @course.all_published_sections.first == @section %>
+        <%= link_to course_section_path(@course, @section.prev_section), class: "px-6 py-0.5 mr-2 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
+          <i class="mr-2 fa-solid fa-chevron-left"></i>
+          前往上一章節
+        <% end %>
+      <% end %>
+      <% unless @course.all_published_sections.last == @section %>
+        <%= link_to course_section_path(@course, @section.next_section), class: "px-6 py-0.5 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
+          前往下一章節
+          <i class="ml-2 fa-solid fa-chevron-right"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%= content_for :sidebar do %>
+  <nav class="absolute left-0 right-0 z-10 flex-shrink-0 pt-4 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen" data-section-list-target="sectionDropdown" data-action="resize@window->section-list#viewportResize">
+    <div class="border-b">
+      <h1 class="text-xl font-bold text-center"><%= @course.title %></h1>
+      <% if current_user.bought?(@course) || current_user.owner?(@course) %>
+        <div class="px-4 mt-4 text-center">
+          <div class="relative h-3 border border-gray-300 rounded-full progress-bar" data-section-list-target="progressBar" data-progressBar=<%= @rate %> data-action="sendWidth@document->section-list#setWidth"></div>
+          <span class="inline-block my-3">已完成<span class="ml-4" data-section-list-target="progress"><%= @rate %>%</span></span>
+        </div>
+      <% else %>
+        <div class="px-4 my-4 text-center">
+          <div class="relative h-3 border rounded-full progress-bar"></div>
+          <span class="inline-block my-3">已完成<span class="ml-4">0%</span></span>
+        </div>
+      <% end %>
+    </div>
+    <h2 class="my-4 text-lg font-bold text-center">所有章節</h2>
+    <%= render partial: "chapter", collection: @course.chapters, locals: { course: @course } %>
+  </nav>
+<% end %>
+
+<% if current_user.bought?(@course) || current_user.owner?(@course) %>
+  <section class="relative flex flex-grow px-5 pt-8 overflow-scroll bg-gray-100 border-l">
+    <div class="container mx-auto">
+      <h1 class="mb-8 text-3xl text-primary-300"><%= @section.title %></h1>
+      <p class="mt-4"><%= markdown(@section.content)%></p>
+      <div class="section-media" data-section-list-target="loading">
+        <div class="loading">Loading...</div>
+        <div class="lds-ring"><div></div><div></div><div></div><div></div><span class="text-xl font-bold" data-section-list-target="loadingCircle">Loading</span></div>
+        <%= video_tag url_for(@section.media), id: "myVideo", controls: true, controlsList: "nodownload"  if @section.media.attached? %>
+      </div>
+      <div class="m-8 mx-auto bg-white border-2 border-dashed rounded-md">
+        <h2 class="inline-block px-8 py-3 text-xl text-white rounded-md bg-primary-300">留言專區</h2>
+        <div class="p-8">
+          <%= render partial: "comments/form", locals: { course: @course, section: @section, parent: nil }%>
+          <div class="pt-4 comment">
+            <%= render @section.comments.where(parent_id: nil).order(id: :desc) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% else %> 
+  <section class="relative flex flex-grow min-h-screen px-5 pt-8 overflow-scroll bg-gray-100 border-l">
+    <div class="container mx-auto">
+      <h1 class="mb-8 text-3xl text-primary-300"><%= @section.title %></h1>
+      <div class="text-center">
+        <i class="my-8 text-6xl fa-solid fa-lock text-warning-200"></i>
+        <h2 class="my-3 text-3xl">此內容為付費課程</h2>
+        <p>如果您已經加入此課程，<%= link_to "您需要登入才能收看課程內容", new_user_session_path, class: "text-warning-100" %>。</p>
+        
+      </div>
+      <div class="flex justify-center mt-6">
+        <%= link_to course_path(@course), class: "px-6 py-3 text-white bg-warning-200 rounded-full hover:bg-warning-100" do %>
+          <i class="mr-4 fa-solid fa-cart-shopping"></i><span>現在購買只要 $ <%= @course.price %></span>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>

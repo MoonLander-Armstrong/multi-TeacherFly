@@ -1,0 +1,61 @@
+<%= content_for :header do %>
+  <nav class="flex justify-between flex-grow mx-auto text-white" data-controller="section-hamburger">
+    <%= link_to 'javascript:history.back()', class: "flex items-center md:ml-20 ml-8 py-4 left-arrow text-xl" do %>
+      <i class="mr-4 fa-solid fa-angle-left"></i>
+      <span>上一頁</span>
+    <% end %>
+    <button class="relative hidden mr-20 md:block" data-action="click->section-hamburger#hiddenAvatar">
+      <div class="w-10 h-10 overflow-hidden rounded-full">
+        <%= image_tag url_for(current_user.avatar) if current_user.avatar.attached? %>
+      </div>
+      <ul class="absolute hidden overflow-hidden rounded-md shadow-md bg-primary-300 top-full -right-12"  data-section-hamburger-target="avatarButton">
+        <li><%= link_to "我的課程", orders_path %></li>
+        <li><%= link_to "編輯會員資料", "#" %></li>
+        <li><%= link_to "登出", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </button>
+    <button class="relative p-1 mr-8 md:hidden" data-action="click->section-hamburger#hiddenHamburger">
+      <div class="w-7 h-0.5 my-1 bg-white"></div>
+      <div class="w-7 h-0.5 my-2 bg-white"></div>
+      <div class="w-7 h-0.5 my-1 bg-white"></div>
+      <ul class="absolute right-0 hidden overflow-hidden rounded-md bg-primary-300 mobile-list top-full" data-section-hamburger-target="hamburgerButton">
+        <li class="w-10 h-10 p-0 mx-auto mt-4 overflow-hidden rounded-full">
+          <%= image_tag url_for(current_user.avatar) if current_user.avatar.attached? %>
+        </li>
+        <li><%= link_to "我的課程", orders_path %></li>
+        <li><%= link_to "編輯會員資料", "#" %></li>
+        <li><%= link_to "登出", destroy_user_session_path, method: :delete %></li>
+      </ul>
+    </button>
+  </nav>
+<% end %>
+
+<%= content_for :sidebar do %>
+  <nav class="absolute left-0 right-0 z-10 flex-shrink-0 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen" data-section-list-target="sectionDropdown" data-action="resize@window->section-list#viewportResize">
+    <div class="w-full h-72">
+      <%= image_tag url_for(@course.image), class: "w-full h-full object-cover" if @course.image.attached? %>
+    </div>
+    <div class="mt-4 shadow">
+      <h1 class="text-xl font-bold text-center"><%= @course.title %></h1>
+      <div class="px-4 my-4 text-center">
+        <div class="relative h-3 border rounded-full progress-bar" data-section-list-target="progressBar" data-progressBar=<%= @rate %> data-action="sendWidth@document->section-list#setWidth"></div>
+        <span class="inline-block my-3">已完成<span class="ml-4" data-section-list-target="progress"><%= @rate %>%</span></span>
+      </div>
+    </div>
+    <ul class="text-xl">
+      <li class="hidden">no used</li>
+      <li class="relative transition bg-secondary-200 text-secondary-500 hover:bg-secondary-300">
+        <%= link_to order_path(@order), class: "block pl-4 py-3" do %>
+          <i class="mr-3 fa-solid fa-table-list"></i>課程大綱
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+<% end %>
+
+<section class="relative flex flex-grow h-screen px-5 pt-5 overflow-scroll border-l">
+  <div class="container mx-auto">
+    <h1 class="mb-4 text-3xl text-primary-300">課程大綱</h1>
+      <%= render partial: "chapter", collection: @chapters %>
+  </div>
+</section>

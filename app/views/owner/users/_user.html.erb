@@ -1,0 +1,35 @@
+<tr class="text-primary-500">
+  <td class="text-left owner-text hover:underline">
+    <div class="flex items-center">
+      <div class="mr-2">
+        <%= link_to information_owner_user_path(user), class: "flex items-center" do %>
+          <% if user.avatar %>
+            <div class="w-8 h-8 mr-4 overflow-hidden rounded-full">
+              <%= image_tag url_for(user.avatar) if user.avatar.attached? %>
+            </div>
+          <% else %>
+            <div class="flex items-center justify-center w-8 h-8 mr-4 overflow-hidden bg-gray-300 rounded-full">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          <% end %>
+          <span><%= user.username %></span>
+        <% end %>
+      </div>
+    </div>
+  </td>
+  <td class="px-6 py-6 text-center">
+    <div class="flex items-center justify-center">
+      <span><%= user.email %></span>
+    </div>
+  </td>
+  <td class="px-6 py-3 text-center">
+    <div class="flex justify-center item-center">
+      <span><%= user.orders.where(status: "paid").count %></span>
+    </div>
+  </td>
+  <td class="px-6 py-3 text-center">
+    <div class="flex justify-center item-center">
+      <span>$<%= user.orders.where(status: "paid").pluck(:price).sum %></span>
+    </div>
+  </td>
+</tr>

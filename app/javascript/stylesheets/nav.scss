@@ -1,0 +1,11 @@
+.logo {
+  height: 88px;
+}
+
+.login-area {
+  @apply items-center;
+
+  a {
+    @apply block w-full py-4 md:px-8 md:py-8 hover:underline hover:bg-primary-200 hover:text-primary-600 transition;
+  }
+}

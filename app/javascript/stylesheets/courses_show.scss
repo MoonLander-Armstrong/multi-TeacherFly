@@ -1,0 +1,32 @@
+.banner-bg {
+  height: 450px;
+}
+
+.lecturer-avatar {
+  width: 160px;
+  height: 160px;
+}
+
+.lecturer-experence-list {
+  list-style-type: disc;
+}
+
+.chapter > li:first-child {
+  @apply px-3 py-4 bg-gray-300 text-primary-600;
+}
+
+.chapter > li:not(:first-child) {
+  @apply px-3 mb-0.5 bg-gray-200 text-primary-600;
+}
+
+.chapter > li:not(:first-child):hover {
+  @apply bg-gray-400 text-gray-200 transition;
+
+  & i {
+    @apply text-warning-100;
+  }
+
+  & span {
+    @apply border-warning-100;
+  }
+}

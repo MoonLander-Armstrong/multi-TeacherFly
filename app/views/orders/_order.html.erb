@@ -1,0 +1,34 @@
+<div class="flex w-full px-4 py-4 sm:w-1/2 md:w-1/3">
+  <%= link_to order_path(order), class: "course-card course-card-hover" do %>
+    <div class="w-full course-card-image">
+      <% if order.course.image.attached? %>
+        <%= image_tag url_for(order.course.image), class: "w-full h-full object-fit" %>
+      <% else %>
+        <div>此課程沒有圖片</div>
+      <% end %>
+    </div>
+    <div class="p-6 course-card-main">
+      <h2 class="mb-6 text-2xl font-bold text-center">
+        <%= order.course.title %>
+      </h2>
+      <p>
+        <%= order.course.description %>
+      </p>
+    </div>
+    <div class="flex items-center justify-between p-6">
+      <div class="flex items-center">
+        <div class="w-8 h-8 mr-2 overflow-hidden rounded-full">
+          <% if order.course.lecturer.mugshot.attached? %>
+            <%= image_tag url_for(order.course.lecturer.mugshot) %>
+          <% else %>
+            <div class="flex items-center justify-center w-8 h-8 mr-4 overflow-hidden bg-gray-300 rounded-full">
+              <i class="fa-solid fa-user"></i>
+            </div>
+          <% end %>
+        </div>
+        <span class="text-sm">講師：<%= Lecturer.find(order.course.lecturer_id).name %><span><%= " / #{Lecturer.find(order.course.lecturer_id).nickname}" if Lecturer.find(order.course.lecturer_id).nickname %></span></span>   
+      </div>
+      <span class="text-warning-200">已完成 <%= Read.read_finished_rate(current_user, order.course.friendly_id) %>%</span>
+    </div>
+  <% end %>
+</div>

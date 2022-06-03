@@ -1,0 +1,58 @@
+<%= content_for :course do %>
+  <ul class="sidebar-list">
+    <li>
+      <%= link_to information_owner_course_path(@course) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>課程內容
+      <% end %>
+    </li>
+    <li>
+      <%= link_to curriculum_owner_course_path(@course) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>章節內容
+      <% end %>
+    </li>
+    <li class="border-b">
+      <%= link_to comments_owner_course_path(@course) do %>
+        <i class="font-medium fa-solid fa-greater-than"></i>留言管理
+      <% end %>
+    </li>
+  </ul>
+<% end %>
+
+
+<div class="relative min-h-screen py-10 owner-main-container">
+  <div class="w-11/12 mx-auto">
+  <%= form_with(model: @section, url: owner_course_chapter_sections_path(@chapter.course_id, @chapter), method: "post", class: "form") do |form| %>
+    <div class="flex items-center justify-between">
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">新增小節</h1>
+      <div>
+        <%= form.submit "+ 新增小節", class: "owner-course-btn" %>
+      </div>
+    </div>
+    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded">
+      <div class="flex items-center mb-4">
+        <%= form.label :title, "小節標題", class: "flex-shrink-0 mr-4" %>
+        <%= form.text_field :title %>
+      </div>
+      <div class="flex items-center mb-4" id="drag-drop-area" data-controller=" uploads">
+        <%= form.label :media, "上傳影片", class: "flex-shrink-0 mr-4" %>
+        <div class="relative flex-grow">
+          <div class="absolute inset-y-0 opacity-50 pointer-events-none bg-secondary-400 " data-uploads-target="progressbar" id="upload-progressbar">
+          </div>
+          <div class="absolute hidden right-2 inset-y-2" id="progressPercent"> 
+          </div>
+          <%= form.file_field :media, direct_upload: true, data: { 'action': 'change->uploads#upload', 'uploads_target': 'mediaInput'} %>
+        </div>
+      </div>
+      <div>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.label "發布狀態", class: "flex-shrink-0 mr-4" %>
+        <%= form.select :published, Section.published_state %>
+      </div>
+      <div class="flex items-center mb-4">
+        <%= form.label :content, "課程內文", class: "flex-shrink-0 mr-4" %>
+        <%= form.text_area :content, data: { controller: "markdown-editor" } %>
+      </div>
+    </div>
+  <% end %>
+</div>

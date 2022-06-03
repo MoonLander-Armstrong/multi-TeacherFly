@@ -1,0 +1,17 @@
+import { Controller } from "@hotwired/stimulus";
+import { marked } from "marked"
+
+export default class extends Controller {
+  initialize() {
+    this.origContent = ""
+  }
+
+  connect() {
+    this.origContent = this.element.textContent
+    this.element.innerHTML = marked.parse(this.origContent)
+  }
+
+  disconnect() {
+    this.element.textContent = this.origContent
+  }
+}
