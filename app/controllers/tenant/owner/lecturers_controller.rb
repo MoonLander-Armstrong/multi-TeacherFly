@@ -36,7 +36,7 @@ class Tenant::Owner::LecturersController < Tenant::BaseController
 
   def destroy
     if @lecturer.mugshot
-      @lecturer.mugshot.purge 
+      @lecturer.mugshot.purge
       @lecturer.destroy
     end
 
