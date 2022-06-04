@@ -2,18 +2,9 @@
 require "constraints/subdomain"
 
 Rails.application.routes.draw do
-  # without subdomain
-  root to: 'pages#home'
-  devise_for :teachers,
-              controllers: {
-                omniauth_callbacks: 'teachers/omniauth_callbacks',
-                sessions: 'teachers/sessions',
-                registrations: 'teachers/registrations',
-              }
-
   constraints(Subdomain) do
     scope module: "tenant" do
-      root to: "pages#home", as: "teacher_root"
+      root to: "courses#index", as: "teacher_root"
       devise_scope :student do
         delete "students/log_out", to: "students/sessions#log_out"
       end
@@ -40,8 +31,6 @@ Rails.application.routes.draw do
           post :payment_response
         end
       end
-
-      get "back", to: "page#back"
 
       # back stage
       namespace :owner do # remember add path: "qwerttyasad"
@@ -91,4 +80,13 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # without subdomain
+  root to: 'pages#home'
+  devise_for :teachers,
+              controllers: {
+                omniauth_callbacks: 'teachers/omniauth_callbacks',
+                sessions: 'teachers/sessions',
+                registrations: 'teachers/registrations',
+              }
 end

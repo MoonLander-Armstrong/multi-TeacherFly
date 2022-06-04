@@ -6,10 +6,8 @@
         <h1 class="mb-4 text-5xl font-bold text-center text-white"><%= @course.title %></h1>
         <h2 h2 class="mb-6 text-3xl text-center text-white"><%= @course.description %></h2>
         <div class="flex">
-          <% if current_user && current_user.bought?(@course) %>
+          <% if student_signed_in? && current_student.bought?(@course) %>
             <%= link_to "進入觀看", order_path(@order), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" %>
-          <% elsif  current_user && current_user.owner?(@course) %>
-            <%= link_to "我是課程老師", course_section_path(@course, @course.all_published_sections.first), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100"%>
           <% else  %>
               <%= link_to payment_course_orders_path(@course), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" do %>
               <i class="mr-4 fa-solid fa-cart-shopping"></i>現在購買只要$ <%= @course.price %>
@@ -59,7 +57,7 @@
     <%= render partial: "courses/chapter", collection: @course.chapters %>
   </div>
   <div class="flex justify-center mt-8">
-    <% if current_user && current_user.bought?(@course) %>
+    <% if student_signed_in? && current_student.bought?(@course) %>
       <%= link_to "進入觀看", order_path(@order), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" %>
     <% else %>
       <%= link_to payment_course_orders_path(@course), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" do %>

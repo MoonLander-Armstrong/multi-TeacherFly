@@ -1,5 +1,4 @@
-class OrdersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:payment_response, :payment]
+class Tenant::OrdersController < Tenant::BaseController
   skip_before_action :verify_authenticity_token, only: %i[payment_response] #忽略外部網址 CSRF
 
   def index

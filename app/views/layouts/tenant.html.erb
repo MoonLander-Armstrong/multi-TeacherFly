@@ -26,11 +26,10 @@
     </header>
     <main class="main">
       <%= yield %>
-      <p><%= "老師已登入" if current_teacher %></p>
-      <%= link_to "進入後台", owner_courses_path %>
     </main>
     <footer class="w-full footer bg-primary-300">
       <%= render "shared/footer"%>
+      <p><%= "老師已登入" if current_teacher %></p>
     </footer>
   </body>
 </html>

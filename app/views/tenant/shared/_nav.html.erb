@@ -13,7 +13,7 @@
       <% end %>
     </button>
     <ul class="login-area teacher fade fade-out absolute top-full inset-x-0 sm:hidden" data-navbar-target="navList">
-      <li><%= link_to '進入後台', new_registration_path(:student) %></li>
+      <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
   <% else %>
@@ -37,8 +37,8 @@
       <% end %>
     </button>
     <ul class="login-area teacher absolute top-full hidden right-4 w-40 mt-4 rounded overflow-hidden" data-navbar-target="dropdownList">
-      <li><%= link_to '進入後台', new_registration_path(:student) %></li>
-      <li><%= link_to '欸欸欸欸欸', students_log_out_path, method: "delete" %></li>
+      <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
+      <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
   <% else %>
     <ul class="login-area teacher hidden sm:flex">

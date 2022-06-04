@@ -1,6 +1,4 @@
-class LecturersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
-
+class Tenant::LecturersController < Tenant::BaseController
   def show
     @lecturers = Lecturer.all
     @lecturer = Lecturer.find(params[:id])

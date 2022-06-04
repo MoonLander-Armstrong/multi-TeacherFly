@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SectionsController < ApplicationController
+class Tenant::SectionsController < Tenant::BaseController
   layout "section"
 
   def show

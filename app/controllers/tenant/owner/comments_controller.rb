@@ -2,13 +2,13 @@ class Tenant::Owner::CommentsController < Tenant::BaseController
   layout "owner"
 
   def index
-    @courses = current_user.courses
+    @courses = Course.all
 
-    if params[:course].nil? || params[:course] == "0" 
+    if params[:course].nil? || params[:course] == "0"
       @courses
-    else 
+    else
       @course_option = params[:course]
-      @courses = @courses.find(params[:course]) 
+      @courses = @courses.find(params[:course])
     end
   end
 
@@ -16,9 +16,7 @@ class Tenant::Owner::CommentsController < Tenant::BaseController
     @course = Course.find(params[:course_id])
     @section = Section.find(params[:section_id])
     @comment = @section.comments.new(comment_params)
-    if @comment.save
-      redirect_to owner_comments_path, notice: "新增留言成功!"
-    end
+    redirect_to owner_comments_path, notice: "新增留言成功!" if @comment.save
   end
 
   def destroy
@@ -33,6 +31,6 @@ class Tenant::Owner::CommentsController < Tenant::BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:content, :parent_id).merge(user: current_user, course: @course)
+    params.require(:comment).permit(:content, :parent_id).merge(course: @course)
   end
 end

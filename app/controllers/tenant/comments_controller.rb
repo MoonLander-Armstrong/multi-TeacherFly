@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Tenant::CommentsController < Tenant::BaseController
   def create
     @course = Course.find(params[:course_id])
     @section = Section.find(params[:section_id])
