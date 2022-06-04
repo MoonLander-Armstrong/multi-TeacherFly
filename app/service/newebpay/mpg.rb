@@ -22,7 +22,7 @@ module Newebpay
     private
 
     def set_info(order)
-      #必填欄位
+      # 必填欄位
       info[:MerchantID] = @merchant_id
       info[:RespondType] = "JSON"
       info[:TimeStamp] = Time.now.to_i.to_s
@@ -32,15 +32,15 @@ module Newebpay
       info[:ItemDesc] = order.name
       info[:LoginType] = 0
 
-      #選填欄位
-      info[:ReturnURL] = "https://2bcb-220-133-132-50.jp.ngrok.io/orders/payment_response"
+      # 選填欄位
+      # info[:ReturnURL] = "https://2bcb-220-133-132-50.jp.ngrok.io/orders/payment_response"
+      info[:ReturnURL] = "http://e85cb9.lvh.me:3000/orders/payment_response"
       info[:NotifyURL] = ""
-      info[:Email] = order.user.email
+      info[:Email] = order.student.email
       info[:CREDIT] = 1
-      #info[:TradeLimit] = 300
     end
 
-    def trade_info 
+    def trade_info
       # AES256 加密後資訊
       aes_encode(url_encoded_query_string)
     end

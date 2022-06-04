@@ -125,10 +125,10 @@ ActiveRecord::Schema.define(version: 2022_06_04_194847) do
 
   create_table "reads", force: :cascade do |t|
     t.bigint "teacher_id", null: false
-    t.boolean "finished"
+    t.boolean "finished", default: false
     t.bigint "student_id", null: false
-    t.bigint "section_id"
-    t.bigint "course_id"
+    t.bigint "section_id", null: false
+    t.string "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_reads_on_section_id"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_194847) do
   add_foreign_key "comments", "students"
   add_foreign_key "orders", "courses"
   add_foreign_key "orders", "students"
+  add_foreign_key "reads", "sections"
   add_foreign_key "reads", "students"
   add_foreign_key "sections", "chapters"
 end

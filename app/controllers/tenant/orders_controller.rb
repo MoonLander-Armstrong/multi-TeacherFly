@@ -2,14 +2,14 @@ class Tenant::OrdersController < Tenant::BaseController
   skip_before_action :verify_authenticity_token, only: %i[payment_response] #忽略外部網址 CSRF
 
   def index
-    @orders = current_user.orders.where(status: "paid").includes(:course)
+    @orders = current_student.orders.where(status: "paid").includes(:course)
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = current_student.orders.find(params[:id])
     @course = @order.course
     @chapters = @course.chapters
-    @rate = Read.read_finished_rate(current_user, @course.friendly_id)
+    @rate = Read.read_finished_rate(current_student, @course.friendly_id)
     render layout: "section"
   end
 
@@ -24,9 +24,9 @@ class Tenant::OrdersController < Tenant::BaseController
   end
 
   def payment
-    if current_user
+    if student_signed_in?
       @course = Course.find(params[:course_id])
-      order = @course.orders.new(name: @course.title, price: @course.price, user: current_user, email: current_user.email)
+      order = @course.orders.new(name: @course.title, price: @course.price, student: current_student, email: current_student.email)
 
       if order.save
         @form_info = Newebpay::Mpg.new(order).form_info
@@ -34,7 +34,7 @@ class Tenant::OrdersController < Tenant::BaseController
         render file: "#{Rails.root}/public/500.html"
       end
     else
-      redirect_to new_user_session_path, alert: "請先進行登入"
+      redirect_to new_student_session_path, alert: "請先進行登入"
     end
   end
 end

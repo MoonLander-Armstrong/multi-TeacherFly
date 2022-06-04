@@ -59,21 +59,15 @@ Rails.application.routes.draw do
         resources :orders, only: [:index] do 
         end
       end
-    end
 
-    # API
-    namespace :api do
-      namespace :v1 do
-        resources :comments, only: [] do
-          member do
-            post :reply
-          end
-        end
-
-        resources :courses, only: [] do
-          resources :sections, only: [] do
-            member do
-              patch :finished
+      # API
+      namespace :api do
+        namespace :v1 do
+          resources :courses, only: [] do
+            resources :sections, only: [] do
+              member do
+                patch :finished
+              end
             end
           end
         end

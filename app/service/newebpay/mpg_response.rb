@@ -10,30 +10,29 @@ module Newebpay
       @status = response['Status']
       @message = response['Message']
       @result = response['Result']
-      @merchant_id = @result['MerchantID'] #商店代號
-      @amount = @result['Amt'] #交易金額
-      @trans_no = @result['TradeNo'] #交易序號
-      @order_no = @result['MerchantOrderNo'] #訂單編號
-      @payment_type = @result['PaymentType'] #支付方式
-      @respond_type = @result['RespondType'] #回傳格式
-      @paytime = @result['PayTime'] #支付完成時間
-      @trade_ip = @result['IP'] #交易 IP
-      @escrow_bank = @result['EscrowBank'] #款項保管銀行
-      @auth_bank = @result['AuthBank'] #收單金融機構
-      @respond_code = @result['RespondCode'] #金融機構回應碼
-      @auth = @result['Auth'] #授權碼
-      @card6_no = @result['Card6No'] #卡號前六碼
-      @card4_no = @result['Card4No'] #卡號末四碼
-      @payment_method = @result['PaymentMethod'] #交易類別
-
+      @merchant_id = @result['MerchantID'] # 商店代號
+      @amount = @result['Amt'] # 交易金額
+      @trans_no = @result['TradeNo'] # 交易序號
+      @order_no = @result['MerchantOrderNo'] # 訂單編號
+      @payment_type = @result['PaymentType'] # 支付方式
+      @respond_type = @result['RespondType'] # 回傳格式
+      @paytime = @result['PayTime'] # 支付完成時間
+      @trade_ip = @result['IP'] # 交易 IP
+      @escrow_bank = @result['EscrowBank'] # 款項保管銀行
+      @auth_bank = @result['AuthBank'] # 收單金融機構
+      @respond_code = @result['RespondCode'] # 金融機構回應碼
+      @auth = @result['Auth'] # 授權碼
+      @card6_no = @result['Card6No'] # 卡號前六碼
+      @card4_no = @result['Card4No'] # 卡號末四碼
+      @payment_method = @result['PaymentMethod'] # 交易類別
     end
 
     def success?
-      status === 'SUCCESS'
+      status == 'SUCCESS'
     end
 
-
     private
+
     # AES 解密
     def decrypy(encrypted_data)
       encrypted_data = [encrypted_data].pack('H*')
@@ -57,7 +56,5 @@ module Newebpay
         false
       end
     end
-
-
   end
 end

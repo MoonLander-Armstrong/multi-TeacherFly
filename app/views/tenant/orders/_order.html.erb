@@ -28,7 +28,7 @@
         </div>
         <span class="text-sm">講師：<%= Lecturer.find(order.course.lecturer_id).name %><span><%= " / #{Lecturer.find(order.course.lecturer_id).nickname}" if Lecturer.find(order.course.lecturer_id).nickname %></span></span>   
       </div>
-      <span class="text-warning-200">已完成 <%= Read.read_finished_rate(current_user, order.course.friendly_id) %>%</span>
+      <span class="text-warning-200">已完成 <%= Read.read_finished_rate(current_student, order.course.friendly_id) %>%</span>
     </div>
   <% end %>
 </div>

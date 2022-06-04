@@ -11,7 +11,7 @@ class Read < ApplicationRecord
 
   def self.read_finished_rate(user, course)
     begin
-      (where(["finished = ? and course_id = ? and user_id = ?", true, course, user]).count.to_f / where(["course_id = ? and user_id = ?", course, user]).count* 100 ).to_i
+      (where(["finished = ? and course_id = ? and student_id = ?", true, course, user]).count.to_f / where(["course_id = ? and student_id = ?", course, user]).count* 100 ).to_i
     rescue FloatDomainError
       return 0
     end
