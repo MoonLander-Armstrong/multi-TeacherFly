@@ -1,5 +1,4 @@
 class Tenant::BaseController < ApplicationController
-  # before_action :authenticate_user!
   before_action :found_tanent_app
 
   private

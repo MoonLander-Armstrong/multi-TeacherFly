@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  section: one
+  user: one
+  course: one
+  parent_id: 1
+
+two:
+  content: MyText
+  section: two
+  user: two
+  course: two
+  parent_id: 1

@@ -14,8 +14,27 @@ Rails.application.routes.draw do
                     registrations: 'tenant/students/registrations',
                   }
 
+      # front stage
+      resources :lecturers, only: [:show]
+      resources :courses, only: %i[index show]do
+        resources :orders, only: [] do
+          collection do
+            get :payment
+          end
+        end
+        resources :sections, only: %i[show] do
+          resources :comments, shallow: true, only: [:create, :destroy]
+        end
+      end
+
+      resources :orders, only: [:index, :show] do
+        collection do
+          post :payment_response
+        end
+      end
+      get "back", to: "page#back"
       # back stage
-      namespace :owner do
+      namespace :owner do # remember add path: "qwerttyasad"
         resources :lecturers
         resources :courses do
           member do
@@ -36,25 +55,6 @@ Rails.application.routes.draw do
           member do
             get :information
           end
-        end
-      end
-
-      # front stage
-      resources :lecturers, only: [:show]
-      resources :courses, only: %i[index show]do
-        resources :orders, only: [] do
-          collection do
-            get :payment
-          end
-        end
-        resources :sections, only: %i[show] do
-          resources :comments, shallow: true, only: [:create, :destroy]
-        end
-      end
-
-      resources :orders, only: [:index, :show] do
-        collection do
-          post :payment_response
         end
       end
     end
@@ -85,13 +85,5 @@ Rails.application.routes.draw do
                 omniauth_callbacks: 'teachers/omniauth_callbacks',
                 sessions: 'teachers/sessions',
                 registrations: 'teachers/registrations',
-                confirmations: 'teachers/confirmations',
-                passwords: 'teachers/passwords'
               }
-
-  # back stage
-  namespace :owner do
-    resources :schools, only: [:index, :create, :update, :destroy] do
-    end
-  end
 end
