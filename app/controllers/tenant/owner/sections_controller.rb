@@ -23,6 +23,8 @@ class Tenant::Owner::SectionsController < Tenant::BaseController
     end
   end
 
+  def edit; end
+
   def update
     if @section.update(section_params)
       redirect_to curriculum_owner_course_path(@course), notice: '新增成功'
@@ -53,7 +55,6 @@ class Tenant::Owner::SectionsController < Tenant::BaseController
   end
 
   def section_policy
-    authorize @course, policy_class:
-    SectionPolicy
+    authorize @course, policy_class: SectionPolicy
   end
 end
