@@ -1,26 +1,37 @@
-<h2><%= t('.sign_in') %></h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="teacher-member relative h-screen">
+  <div class="container p-4 mx-auto">
+    <div class="teacher-member-form">
+      <h2 class="teacher-member-form-title">
+        <%= t('.sign_in') %>
+      </h2>
+      <div class="w-full mt-6">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "shared/flash" %>
+  
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+  
+          <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
+  
+          <% if devise_mapping.rememberable? %>
+            <div class="field form-control-group">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+  
+          <%= f.submit t('.sign_in') %>
+  
+        <% end %>
+      </div>
+      <%= link_to "忘記密碼？", new_password_path(resource_name), class: "teacher-form-link teacher-form-link-self" %>
+      <div class="member-footer">還沒有註冊帳號？</div>
+      <%= link_to "註冊", new_registration_path(resource_name), class: "teacher-form-link teacher-form-link-self" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
   </div>
-<% end %>
-
-<%= render "students/shared/links" %>
+</div>

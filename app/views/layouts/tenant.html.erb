@@ -17,12 +17,12 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag asset_path('logo-icon') %>
+    <%= favicon_link_tag asset_path('logo/logo-icon') %>
   </head>
 
   <body>
-    <header class="fixed z-50 w-full shadow-md header bg-secondary-400 text-primary-100">
-      <%= render "shared/tenant_nav" %>
+    <header class="fixed z-50 w-full h-16 shadow-md header bg-secondary-400 text-primary-100">
+      <%= render "tenant/shared/nav" %>
     </header>
     <main class="main">
       <%= yield %>

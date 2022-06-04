@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Teachers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :set_current_tenant_account
+
   def google_oauth2
     @teacher = Teacher.create_from_provider_data(request.env['omniauth.auth'])
 

@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   constraints(Subdomain) do
     scope module: "tenant" do
       root to: "pages#home", as: "teacher_root"
+      devise_scope :student do
+        delete "students/log_out", to: "students/sessions#log_out"
+      end
       devise_for :students,
                   controllers: {
-                    sessions: 'students/sessions',
-                    registrations: 'students/registrations',
-                    confirmations: 'students/confirmations',
-                    passwords: 'students/passwords'
+                    sessions: 'tenant/students/sessions',
+                    registrations: 'tenant/students/registrations',
                   }
 
       # back stage
