@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_194847) do
     t.bigint "teacher_id", null: false
     t.bigint "chapter_id", null: false
     t.string "title"
-    t.string "publishd"
+    t.string "published"
     t.text "content"
     t.string "slug"
     t.datetime "created_at", precision: 6, null: false

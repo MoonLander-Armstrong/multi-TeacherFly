@@ -8,7 +8,7 @@ class Chapter < ApplicationRecord
 
   # relationship
   belongs_to_tenant :teacher
-  belongs_to :courses
+  belongs_to :course
   has_many :sections, dependent: :destroy
 
   # find better way

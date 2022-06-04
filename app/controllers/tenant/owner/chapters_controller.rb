@@ -18,6 +18,8 @@ class Tenant::Owner::ChaptersController < Tenant::BaseController
     if @chapter.save
       redirect_to curriculum_owner_course_path(@course), notice: '新增成功'
     else
+      p "-" * 50
+      p @chapter.errors.full_messages
       redirect_to curriculum_owner_course_path(@course)
       flash[:alert] = '請輸入正確資訊'
     end

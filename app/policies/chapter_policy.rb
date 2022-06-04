@@ -11,7 +11,7 @@ class ChapterPolicy < ApplicationPolicy
   end
 
   def create? 
-    owner_teacher
+    teacher
   end
 
   def edit?

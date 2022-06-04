@@ -49,7 +49,7 @@ class Tenant::Owner::SectionsController < Tenant::BaseController
   end
 
   def find_course
-    @course = current_user.courses.find(params[:course_id])
+    @course = Course.find(params[:course_id])
   end
 
   def section_policy

@@ -3,12 +3,11 @@
 class Tenant::Owner::CoursesController < Tenant::BaseController
   layout "owner"
   before_action :find_course, only:[:update, :destroy, :information, :curriculum, :comments]
-  before_action :course_policy, only:[:update, :destroy, :information, :curriculum, :comments]
+  before_action :course_policy
 
   def index
     authorize :course
-    # @courses = current_user.courses.order(id: :asc)
-    @course = Course.all
+    @courses = Course.all
   end
 
   def new
@@ -39,10 +38,8 @@ class Tenant::Owner::CoursesController < Tenant::BaseController
   def destroy
     if @course.image.attached?
       @course.image.purge
-      @course.destroy
-    else
-      @course.destroy
     end
+    @course.destroy
     redirect_to owner_courses_path, alert: "刪除成功！"
   end
 
@@ -63,8 +60,6 @@ class Tenant::Owner::CoursesController < Tenant::BaseController
   def course_params
     params.require(:course).permit(:title, :content, :price, :published, :description, :image, :lecturer_id)
   end
-
-  # .merge(teacher_id: current_teacher.id)
 
   def course_policy
     authorize @course, policy_class: CoursePolicy

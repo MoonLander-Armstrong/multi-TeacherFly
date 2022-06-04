@@ -1,6 +1,4 @@
 class CoursePolicy < ApplicationPolicy
-  attr_reader :user, :course
-
   def index?
     teacher
   end
@@ -9,27 +7,27 @@ class CoursePolicy < ApplicationPolicy
     create?
   end
 
-  def create? 
+  def create?
     teacher
   end
 
   def update?
-    owner_teacher
+    teacher
   end
 
   def destroy?
-    owner_teacher
+    teacher
   end
 
   def information?
-    owner_teacher
+    teacher
   end
 
   def comments?
-    owner_teacher
+    teacher
   end
 
   def curriculum?
-    owner_teacher
+    teacher
   end
 end

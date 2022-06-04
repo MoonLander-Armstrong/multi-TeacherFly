@@ -2,6 +2,15 @@
 require "constraints/subdomain"
 
 Rails.application.routes.draw do
+  # without subdomain
+  root to: 'pages#home'
+  devise_for :teachers,
+              controllers: {
+                omniauth_callbacks: 'teachers/omniauth_callbacks',
+                sessions: 'teachers/sessions',
+                registrations: 'teachers/registrations',
+              }
+
   constraints(Subdomain) do
     scope module: "tenant" do
       root to: "pages#home", as: "teacher_root"
@@ -82,12 +91,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  root to: 'pages#home'
-  devise_for :teachers,
-              controllers: {
-                omniauth_callbacks: 'teachers/omniauth_callbacks',
-                sessions: 'teachers/sessions',
-                registrations: 'teachers/registrations',
-              }
 end
