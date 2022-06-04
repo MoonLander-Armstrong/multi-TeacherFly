@@ -1,4 +1,6 @@
 class Chapter < ApplicationRecord
+  include Slugable
+
   # validates
   validates :title,
             presence: true,

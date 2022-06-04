@@ -20,7 +20,7 @@
 
 <div class="owner-main-container relative pt-10 min-h-screen">
   <div class="w-11/12 mx-auto">
-  <%= form_with model: @chapter, url: owner_course_chapters_path(@course) do |form| %>
+  <%= form_with model: @chapter, url: owner_course_chapter_path(@course, @chapter) do |form| %>
     <div class="flex justify-between items-center">
       <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">編輯章節</h1>
       <div>

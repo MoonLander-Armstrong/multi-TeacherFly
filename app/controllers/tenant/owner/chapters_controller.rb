@@ -18,8 +18,6 @@ class Tenant::Owner::ChaptersController < Tenant::BaseController
     if @chapter.save
       redirect_to curriculum_owner_course_path(@course), notice: '新增成功'
     else
-      p "-" * 50
-      p @chapter.errors.full_messages
       redirect_to curriculum_owner_course_path(@course)
       flash[:alert] = '請輸入正確資訊'
     end
@@ -32,7 +30,7 @@ class Tenant::Owner::ChaptersController < Tenant::BaseController
   def update
     @course = Course.find(params[:course_id])
     if @chapter.update(chapter_params)
-      redirect_to curriculum_owner_course_path(@course), notice: '新增成功'
+      redirect_to curriculum_owner_course_path(@course), notice: '修改成功'
     else
       flash.now[:alter] = '請輸入正確資訊'
       render :edit
@@ -60,6 +58,6 @@ class Tenant::Owner::ChaptersController < Tenant::BaseController
   end
 
   def chapter_policy
-    authorize @course, policy_class: ChapterPolicy 
+    authorize @course, policy_class: ChapterPolicy
   end
 end
