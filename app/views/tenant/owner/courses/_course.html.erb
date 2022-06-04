@@ -1,0 +1,42 @@
+<tr>
+  <td class="text-left owner-text text-primary-500">
+    <div class="flex items-center">
+      <div class="mr-2">
+        <span class="text-lg text-primary underline hover:text-primary-200"><%= link_to course.title, information_owner_course_path(course) %></span>
+      </div>
+    </div>
+  </td>
+  <td class="px-6 py-6 text-center">
+    <div class="flex items-center justify-center">
+      <span><%= course.lecturer.name %></span>
+    </div>
+  </td>
+  <td class="px-6 py-3 text-center">
+    <div class="flex justify-center item-center">
+      <div class="w-4 mr-2">
+        <span><%= course.price.zero? ? "Free" : "$#{course.price}" %></span>
+      </div>
+    </div>
+  </td>
+  <td class="px-6 py-3 text-center">
+    <div class="flex justify-center item-center">
+      <div class="w-4 mr-2">
+        <span>0</span>
+      </div>
+    </div>
+  </td>
+  <td class="flex items-center justify-center px-3 py-6 text-center">
+    <div class="mr-2 w-18">
+      <span class="tag <%= course.published == "publish" ? "tag-publish" : "tag-draft" %>">
+        <%= course.published == "publish" ? "發佈" : "草稿" %>
+      </span>
+    </div>
+    <div class="w-4 mx-4 text-red-400 transform scale-150 hover:text-purple-500">
+      <%= link_to  owner_course_path(course), method: "delete", data: { confirm: "確定刪除?" }  do %>
+        <svg xmlns="http://www.w3./2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      <% end %>
+    </div>
+  </td>
+</tr>

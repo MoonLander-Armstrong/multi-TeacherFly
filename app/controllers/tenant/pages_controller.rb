@@ -1,9 +1,8 @@
 class Tenant::PagesController < Tenant::BaseController
   # skip_before_action :authenticate_user!
 
-  def home; end
-
-  def back
-    
+  # remember to detect teacher sign_in?
+  def home
+    sign_in MultiTenantSupport.current_tenant
   end
 end

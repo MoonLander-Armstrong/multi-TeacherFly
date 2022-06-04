@@ -1,11 +1,6 @@
 class CoursePolicy < ApplicationPolicy
   attr_reader :user, :course
 
-  def initialize(user, course)
-    @user = user
-    @course = course
-  end
-
   def index?
     teacher
   end
@@ -18,8 +13,6 @@ class CoursePolicy < ApplicationPolicy
     teacher
   end
 
-
-
   def update?
     owner_teacher
   end
@@ -31,17 +24,12 @@ class CoursePolicy < ApplicationPolicy
   def information?
     owner_teacher
   end
-  
+
   def comments?
     owner_teacher
   end
 
   def curriculum?
     owner_teacher
-  end
-
-  private
-  def owner_teacher
-    user && user.role == "teacher" && user == course.user
   end
 end

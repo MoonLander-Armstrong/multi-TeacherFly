@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   layout :layout_by_subdomain
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-
   rescue_from Pundit::NotAuthorizedError, with: :no_permission
   rescue_from Pundit::InvalidConstructorError, with: :no_permission
 
@@ -10,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   def not_found
     render file: "#{Rails.root}/public/404.html", status: 404, layout: false
+  end
+
+  def no_permission
+    not_found
   end
 
   def after_sign_in_path_for(resource)
@@ -22,5 +25,12 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
+  end
+
+  def pundit_user
+    {
+      teacher: current_teacher,
+      student: current_student
+    }
   end
 end

@@ -26,13 +26,14 @@ Rails.application.routes.draw do
           resources :comments, shallow: true, only: [:create, :destroy]
         end
       end
-
       resources :orders, only: [:index, :show] do
         collection do
           post :payment_response
         end
       end
+
       get "back", to: "page#back"
+
       # back stage
       namespace :owner do # remember add path: "qwerttyasad"
         resources :lecturers
@@ -55,6 +56,9 @@ Rails.application.routes.draw do
           member do
             get :information
           end
+        end
+        resources :comments, only: [:index]
+        resources :orders, only: [:index] do 
         end
       end
     end

@@ -39,11 +39,11 @@ class ApplicationPolicy
   private
 
   def teacher
-    user && user.role == "teacher"
+    user[:teacher]
   end
 
   def student
-    user && user.role == "student"
+    user[:student]
   end
 
   class Scope

@@ -37,7 +37,7 @@
       <% end %>
     </button>
     <ul class="login-area admin absolute top-full hidden right-4 w-40 mt-4 rounded overflow-hidden" data-navbar-target="dropdownList">
-      <li><%= link_to '進入後台', back_url(subdomain: current_teacher.subdomain) %></li>
+      <li><%= link_to '進入後台', root_url(subdomain: current_teacher.subdomain) %></li>
       <li><%= link_to '登出', destroy_teacher_session_path, method: "delete" %></li>
     </ul>
   <% else %>

@@ -6,15 +6,15 @@ class Tenant::Owner::CoursesController < Tenant::BaseController
   before_action :course_policy, only:[:update, :destroy, :information, :curriculum, :comments]
 
   def index
-    # authorize :course
+    authorize :course
     # @courses = current_user.courses.order(id: :asc)
-    # @course = Course.all
+    @course = Course.all
   end
 
   def new
     authorize :course
-    @course = current_user.courses.new
-    Lecturer.find_or_create_by(name: current_user.username)
+    @course = Course.new
+    Lecturer.find_or_create_by(name: current_teacher.username)
   end
 
   def create
@@ -61,8 +61,10 @@ class Tenant::Owner::CoursesController < Tenant::BaseController
   end
 
   def course_params
-    params.require(:course).permit(:title, :content, :price, :published, :description, :image, :lecturer_id).merge(user_id: current_user.id)
+    params.require(:course).permit(:title, :content, :price, :published, :description, :image, :lecturer_id)
   end
+
+  # .merge(teacher_id: current_teacher.id)
 
   def course_policy
     authorize @course, policy_class: CoursePolicy
