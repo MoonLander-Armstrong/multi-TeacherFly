@@ -64,7 +64,7 @@
 						</td>
 						<td class="px-6 py-6 text-center">
 							<div class="flex items-center justify-center">
-								<span><%= order.created_at.to_s.gsub("+0800", "")  %></span>
+								<span><%= order.created_at.strftime("%Y/%m/%d")  %></span>
 							</div>
 						</td>
 

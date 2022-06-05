@@ -46,7 +46,7 @@
   <nav class="absolute left-0 right-0 z-10 flex-shrink-0 pt-4 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen" data-section-list-target="sectionDropdown" data-action="resize@window->section-list#viewportResize">
     <div class="border-b">
       <h1 class="text-xl font-bold text-center"><%= @course.title %></h1>
-      <% if current_student.bought?(@course) || current_student.owner?(@course) %>
+      <% if current_student.bought?(@course) || current_student.owner?(@course)%>
         <div class="px-4 mt-4 text-center">
           <div class="relative h-3 border border-gray-300 rounded-full progress-bar" data-section-list-target="progressBar" data-progressBar=<%= @rate %> data-action="sendWidth@document->section-list#setWidth"></div>
           <span class="inline-block my-3">已完成<span class="ml-4" data-section-list-target="progress"><%= @rate %>%</span></span>

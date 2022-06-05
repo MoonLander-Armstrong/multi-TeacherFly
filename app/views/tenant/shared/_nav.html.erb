@@ -12,7 +12,10 @@
         <i class="fa-solid fa-user"></i>
       <% end %>
     </button>
+
     <ul class="absolute inset-x-0 login-area teacher fade fade-out top-full sm:hidden" data-navbar-target="navList">
+      <li><%= link_to "所有課程", courses_path %></li>
+      <li><%= link_to "我的課程", orders_path %></li>
       <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
@@ -29,6 +32,10 @@
   <% end %>
 <%# navbar of mobile horizontal & up %>
   <% if student_signed_in? %>
+    <ul class="hidden mr-6 login-area teacher sm:flex">
+      <li><%= link_to "所有課程", courses_path %></li>
+      <li><%= link_to "我的課程", orders_path %></li>
+    </ul>
     <button class="hidden w-8 h-8 overflow-hidden bg-gray-300 rounded-full sm:block" data-action="click->navbar#toggleDropdownList">
       <% if current_student.avatar.attached? %>
         <%= image_tag url_for(current_student.avatar) %>
