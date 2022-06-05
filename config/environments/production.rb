@@ -7,7 +7,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'https://teacherfly.herokuapp.com/' }
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -69,11 +69,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['mailgun_address'],
-    port:                 587,
-    domain:               'TeacherFly.site',
-    user_name:            ENV['mailgun_user_name'],
-    password:             ENV['mailgun_password'],
+    address:              ENV['MAILGUN_ADDRESS'],
+    port:                 ENV['PORT'],
+    domain:               ENV['DOMAIN'],
+    user_name:            ENV['MAILGUN_USER_NAME'],
+    password:             ENV['MAILGUN_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true
   }

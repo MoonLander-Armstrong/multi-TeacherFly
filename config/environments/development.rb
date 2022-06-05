@@ -42,11 +42,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['mailgun_address'],
-    port:                 ENV['port'],
-    domain:               ENV['domain'],
-    user_name:            ENV['mailgun_user_name'],
-    password:             ENV['mailgun_password'],
+    address:              ENV['MAILGUN_ADDRESS'],
+    port:                 ENV['PORT'],
+    domain:               ENV['DOMAIN'],
+    user_name:            ENV['MAILGUN_USER_NAME'],
+    password:             ENV['MAILGUN_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true
   }
