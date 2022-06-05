@@ -25,6 +25,9 @@
       <%= render "tenant/shared/nav" %>
     </header>
     <main class="main">
+      <div class="fixed z-40 transform -translate-x-1/2 left-1/2">
+        <%= render "shared/flash" %>
+      </div> 
       <%= yield %>
     </main>
     <footer class="w-full footer bg-primary-300">
