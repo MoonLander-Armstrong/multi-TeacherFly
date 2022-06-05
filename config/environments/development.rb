@@ -36,9 +36,20 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              ENV['mailgun_address'],
+    port:                 ENV['port'],
+    domain:               ENV['domain'],
+    user_name:            ENV['mailgun_user_name'],
+    password:             ENV['mailgun_password'],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -75,7 +86,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'c6fffe.lvh.me:3000' }
   # config.autoload_paths << Rails.root.join('service') ＃如果讀不到app內新增的資料夾要加這句
   config.hosts << ".ngrok.io"
   config.hosts << "ngrok.io"

@@ -27,6 +27,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 gem 'streamio-ffmpeg', '~> 3.0', '>= 3.0.2'
 gem "multi-tenant-support", "~> 1.5"
+gem "net-smtp", "~> 0.3.1"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -1,8 +1,8 @@
-<li class="relative flex bg-gray-100 hover:bg-primary-200 transition" data-controller="finished-list" data-course-id=<%= course.friendly_id %> data-section-id=<%= section.id %> data-section-slug-id=<%= section.friendly_id %>>
+<li class="relative flex transition bg-gray-100 hover:bg-primary-200" data-controller="finished-list" data-section-list-target="section" data-course-id=<%= course.friendly_id %> data-section-id=<%= section.id %> data-section-slug-id=<%= section.friendly_id %>>
   <% if current_student.bought?(@course) %>
     <label for="<%= section.friendly_id %>" class="absolute inset-y-0 flex items-center pl-2 cursor-pointer">
-      <i class="fa-solid fa-circle-check <%= "hidden" unless current_student.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="finishedIcon"></i>
-      <span class="bg-white w-4 h-4 border-2 border-black rounded-full <%= "hidden" if current_student.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="unfinishedIcon"></span>
+      <i class="fa-solid fa-circle-check <%= "hidden" unless current_student.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="finishedIcon" data-section-list-target="finishedIcon" data-section-id=<%= section.id %>></i>
+      <span class="bg-white w-4 h-4 border-2 border-black rounded-full <%= "hidden" if current_student.reads.to_read_sections(section).pluck(:finished)[0] %>" data-finished-list-target="unfinishedIcon" data-section-list-target="unfinishedIcon" data-section-id=<%= section.id %>></span>
       <input type="checkbox" class="hidden" id="<%= section.friendly_id %>" <%= "checked" if current_student.reads.to_read_sections(section).pluck(:finished)[0] %> data-action="change->finished-list#toggleFinished">
     </label>
   <% else %>

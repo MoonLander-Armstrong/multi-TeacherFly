@@ -17,6 +17,9 @@ class Student < ApplicationRecord
   has_many :to_reads, through: :reads, source: :section
   has_one_attached :avatar, dependent: :destroy
 
+  # scope
+  scope :ordered, -> { includes(:orders).order('orders.price') }
+
   def bought?(course)
     orders.where(status: "paid").exists?(course_id: course.id)
   end

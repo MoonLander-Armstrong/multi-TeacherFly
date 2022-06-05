@@ -7,9 +7,9 @@ export default class extends Controller {
   upload(){
     const uploader = new Uploader(this.mediaInputTarget.files[0], this.url);
     uploader.start()
-    document.getElementById("progressPercent").classList.toggle("hidden")
+    console.log(uploader);
+    document.getElementById("uploadfilename").textContent = uploader.file.name
     this.mediaInputTarget.value = null
-
   }
 
 
@@ -36,23 +36,36 @@ class Uploader {
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("value", blob.signed_id);
         hiddenField.name = input.name
-        document.querySelector('.form').appendChild(hiddenField)  
-        
-        // Add an appropriately-named hidden input to the form
-        // with a value of blob.signed_id
+        document.querySelector('.form').appendChild(hiddenField)
       }
     })
   }
 
 
   directUploadWillStoreFileWithXHR(request) {
+    console.log(request);
     request.upload.addEventListener("progress",
       event => this.directUploadDidProgress(event))
+    request.upload.addEventListener("loadend",
+      event => this.directUploadDidEnd(event))
+    request.upload.addEventListener("error",
+      event => this.directUploadDidError(event))
   }
 
   directUploadDidProgress(event) {
     // Use event.loaded and event.total to update the progress bar
     document.getElementById("upload-progressbar").style.width = `${Math.round((event.loaded / event.total)* 100)}%`
-    document.getElementById("progressPercent").textContent = `${Math.round((event.loaded / event.total)* 100)}%` 
-  } 
+    document.getElementById("progressPercent").textContent = `${Math.round((event.loaded / event.total)* 100)}%`
+  }
+
+  directUploadDidEnd() {
+    document.getElementById("progressPercent").innerHTML = `
+      <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+    `
+  }
+  directUploadDidError() {
+    document.getElementById("progressPercent").innerHTML = `
+    <i class="fa-solid fa-circle-xmark text-red-500 text-xl"></i>
+    `
+  }
 }

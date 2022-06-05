@@ -1,0 +1,16 @@
+<h1>您好<%= @student.username %></h1>
+<h2>
+  您已經成為了
+  <%= @teacher.username %>
+  的學生了
+</h2>
+
+<p>您的登入帳號為: <%= @student.email %></p>
+<p>您的登入密碼預設為: 000000</p>
+
+
+下方為 TeacherFly的網站連結 
+<h3>
+  <a href="https://teacherfly.site/">https://teacherfly.site</a>
+  <%= link_to root_url(subdomain: teacher.subdomain) %>
+</h3>

@@ -4,7 +4,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.belongs_to :teacher, null: false
       t.string :name
       t.string :email
-      t.integer :price
+      t.integer :price, default: 0
       t.string :slug
       t.string :status
       t.belongs_to :course, null: false, foreign_key: true

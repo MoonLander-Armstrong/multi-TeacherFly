@@ -17,22 +17,21 @@
 				</tr>
 			</thead>
 			<tbody class="owner-tbody">
-				<%= render @users %>
+				<%= render @students %>
 			</tbody>
 		</table>
 		<div class="hidden mx-auto my-20" data-ajaxForm-target="form">
-		<%= form_with(scope: "user", url: owner_users_path, method: :post) do |form| %>
+		<%= form_with(scope: "student", url: owner_students_path, method: :post) do |form| %>
 			<div class="p-8 border border-gray-300 rounded bg-secondary-200">
-				<div class="flex items-center mb-4">	
+				<div class="flex items-center mb-4">
 					<%= form.label :username, "學生姓名", class: "mr-4" %>
 					<%= form.text_field :username, maxlength: 20, class: "w-1/4", data: { ajaxForm_target: "input" }, placeholder: "輸入姓名" %>
 					<%= form.label :email, "Email", class: "mx-4" %>
 
-					<%= form.text_field :email, maxlength: 20, class: "w-1/4 ", data: { ajaxForm_target: "input" }, placeholder: "輸入Email" %>
+					<%= form.text_field :email, class: "w-1/4 ", data: { ajaxForm_target: "input" }, placeholder: "輸入Email" %>
 					<%= form.button class: "owner-course-btn flex items-center ml-5", data: { action: "submit->ajaxForm#send"} do %>
 
 					<%= form.hidden_field :password, maxlength: 20, class: "w-1/4 ", data: { ajaxForm_target: "input" }, value: "000000" %>
-
 						<i class="mr-4 fa-solid fa-circle-check"></i>新增
 					<% end %>
 				</div>

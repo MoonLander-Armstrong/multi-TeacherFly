@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import Rails from "@rails/ujs";
 
 export default class extends Controller {
   static targets = [
@@ -7,10 +8,21 @@ export default class extends Controller {
     "loadingCircle",
     "progressBar",
     "progress",
+    "videoFinished",
+    "section",
+    "finishedIcon",
+    "unfinishedIcon"
   ];
+  
+  initialize() {
+    const sendWidth = new CustomEvent("sendWidth", {
+      detail: { progressBarWidth: "0%" },
+    });
+    this.sectionTarget.sendWidthEvent = sendWidth;
+  }
 
   connect() {
-    // progressbarWidth
+      // progressbarWidth
     this.progressBarTarget.style.setProperty(
       "--progressBar-width",
       `${this.progressBarTarget.dataset.progressbar}%`
@@ -59,5 +71,38 @@ export default class extends Controller {
       detail.progressBarWidth
     );
     this.progressTarget.textContent = detail.progressBarWidth;
+  }
+
+  videoFinished() {
+    const video = this.videoFinishedTarget
+    const { sendWidthEvent } = this.sectionTarget
+    const finishedIconTargets = Array.from(this.finishedIconTargets)
+    const unfinishedIconTargets = Array.from(this.unfinishedIconTargets)
+    
+    const data = new FormData();
+    data.append("finished", true);
+    data.append("sectionId", `${video.dataset.sectionId}`);
+    
+    var finishedIconTarget = finishedIconTargets.find((e)=> e.dataset.sectionId == video.dataset.sectionId)
+    var unfinishedIconTarget = unfinishedIconTargets.find((e)=> e.dataset.sectionId == video.dataset.sectionId)
+
+
+      Rails.ajax({
+        url: `/api/v1/courses/${video.dataset.courseId}/sections/${video.dataset.sectionSlugId}/finished`,
+        type: "patch",
+        data,
+        success: function ({ progress, finished }) {
+          if (finished[0]) {
+            finishedIconTarget.classList.remove("hidden");
+            unfinishedIconTarget.classList.add("hidden");
+          } else {
+            finishedIconTarget.classList.add("hidden");
+            unfinishedIconTarget.classList.remove("hidden");
+          }
+          sendWidthEvent.detail.progressBarWidth = progress;
+          document.dispatchEvent(sendWidthEvent);
+        },
+      });
+    // })
   }
 }

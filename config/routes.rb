@@ -50,9 +50,10 @@ Rails.application.routes.draw do
             end
           end
         end
-        resources :users, only: [:index, :update] do
+        resources :students, only: [:index, :create, :update] do
           member do
             get :information
+            post :subscription
           end
         end
         resources :comments, only: [:index]

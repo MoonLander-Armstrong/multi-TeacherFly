@@ -9,31 +9,31 @@
   <input type="checkbox" id="hamburger" class="hidden hamburger" />
   <ul class="absolute w-64 h-screen overflow-y-scroll transition-all duration-500 top-full -left-full md:top-56 md:left-0 bg-primary-300 sidebar-list md:overflow-y-hidden">
     <li class="mx-4 mt-10">
-      <%= link_to owner_courses_path do %>
+      <%= link_to owner_courses_path, data: { sidebar_style_target: "courses" } do %>
         <i class="fa-solid fa-book-open"></i>全部課程
       <% end %>
       <%= yield :course %>
     </li>
     <li class="mx-4">
-      <%= link_to owner_comments_path do %>
+      <%= link_to owner_comments_path, data: { sidebar_style_target: "comments" } do %>
         <i class="fa-solid fa-book-open"></i>所有留言
       <% end %>
     </li>
     <li class="mx-4">
-      <%= link_to owner_lecturers_path do %>
+      <%= link_to owner_lecturers_path, data: { sidebar_style_target: "lecturers" } do %>
         <i class="fa-solid fa-chalkboard-user"></i>講師名單
       <% end %>
       <%= yield :lecturer %>
     </li>
     <li class="mx-4">
-      <%= link_to owner_users_path do %>
+      <%= link_to owner_students_path, data: { sidebar_style_target: "users" } do %>
         <i class="fa-solid fa-user-group"></i>學生管理
       <% end %>
       <%= yield :user %>
     </li>
     <li class="mx-4">
-      <%= link_to owner_orders_path do %>
-        <i class="pr-1 fa-solid fa-cart-shopping"></i>授課管理
+      <%= link_to owner_orders_path, data: { sidebar_style_target: "orders" } do %>
+        <i class="pr-1 fa-solid fa-cart-shopping"></i>訂單管理
       <% end %>
     </li>
     <li class="mx-4">

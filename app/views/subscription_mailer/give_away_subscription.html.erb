@@ -1,0 +1,13 @@
+<h1>您好 <%= @student.username %> </h1>
+<h2>
+  <%= @teacher.username %>
+  贈送了你一門課程：
+  <%= Course.find(@order.course_id).title %>
+</h2>
+
+
+<h3>
+  登入 -> 我的課程<br>
+  TeacherFly的網站連結 ： <a href="https://teacherfly.site/">https://teacherfly.site</a>
+  <%= link_to root_url(subdomain: teacher.subdomain) %>
+</h3>

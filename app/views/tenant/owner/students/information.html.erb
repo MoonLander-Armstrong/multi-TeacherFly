@@ -1,7 +1,7 @@
 <%= content_for :user do %>
   <ul class="sidebar-list">
     <li>
-      <%= link_to information_owner_user_path(@user) do %>
+      <%= link_to information_owner_student_path(@student) do %>
         <i class="font-medium fa-solid fa-greater-than"></i>會員詳細資料
       <% end %>
     </li>
@@ -10,7 +10,7 @@
 
 <div class="relative min-h-screen pt-10 owner-main-container">
   <div class="w-11/12 mx-auto">
-    <%= form_with model: @user, url: owner_user_path(@user), method: "patch" do |form| %>
+    <%= form_with model: @student, url: owner_student_path(@student), method: "patch" do |form| %>
       <div class="flex items-center justify-between">
         <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">會員資訊</h1>
         <%= render "shared/flash" %>
@@ -26,8 +26,8 @@
             <div class="flex-shrink-0 w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full lg:mb-0 lg:mx-4 field" data-controller="avatar-label">
               <%= form.label :avatar, class: "avatar-label relative block w-40 h-40 rounded-full overflow-hidden cursor-pointer" do %>
                 <div class="absolute inset-0 w-40 h-40 mx-auto text-white">
-                  <% if @user.avatar.attached? %>
-                    <%= image_tag url_for(@user.avatar), class: "w-40 h-40 object-cover", data: { avatar_label_target: "preview" } %>
+                  <% if @student.avatar.attached? %>
+                    <%= image_tag url_for(@student.avatar), class: "w-40 h-40 object-cover", data: { avatar_label_target: "preview" } %>
                   <% else %>
                     <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-avatar-label-target="fakeImg">
                       <i class="text-6xl fa-solid fa-user"></i>
@@ -50,6 +50,7 @@
             </div>
           </div>
         </div>
+      <% end %>
         <div class="md:w-1/2 md:ml-2">
           <div>
             <table class="overflow-hidden rounded-md shadow-md owner-table">
@@ -60,34 +61,16 @@
                 </tr>
               </thead>
               <tbody class="owner-tbody">
-                <% @user.orders.each do |order| %>
-                  <tr>
-                    <td class="text-left owner-text text-primary-500">
-                      <div class="flex items-center">
-                        <div class="mr-2">
-                          <span class="text-lg">
-                            <%= order.course.title %>
-                          </span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="px-6 py-6 text-center">
-                      <div class="flex items-center justify-center text-base">
-                        <span><%= order.slug %></span>
-                      </div>
-                    </td>
-                  </tr>
-                <% end %>
+                <%= render partial: "tenant/owner/students/order", collection: @orders %>
               </tbody>
             </table>
           </div>
-    <% end %>
           <div class="h-20 mt-6 border rounded-md bg-secondary-200">
-            <% if @user.orders.pluck(:course_id).sort() === current_user.courses.where(published: "publish").pluck(:id) %>
+            <% if @orders.length === Course.published.length %>
               <span>此學生已經擁有您的全部課程</span>
             <% else %>
-              <%= form_with(model: @order, url: subscription_owner_user_path(@user), method: :post) do |form| %>
-              <%= form.select :course_id, (current_user.courses.where(published: "publish") - @user.orders.map { |order| order.course }).pluck(:title, :id) %>
+              <%= form_with(model: @order, url: subscription_owner_student_path(@student), method: :post) do |form| %>
+              <%= form.select :course_id, (Course.published - @student.orders.map { |order| order.course }).pluck(:title, :id) %>
               <%= form.submit %>
               <% end %>
             <% end %>
