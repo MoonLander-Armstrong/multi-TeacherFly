@@ -5,7 +5,7 @@
         <i class="font-medium fa-solid fa-greater-than"></i>課程內容
       <% end %>
     </li>
-    <li>
+    <li class="owner-current-page">
       <%= link_to curriculum_owner_course_path(@course) do %>
         <i class="font-medium fa-solid fa-greater-than"></i>章節內容
       <% end %>
@@ -17,33 +17,35 @@
   <div class="w-11/12 mx-auto">
   <%= form_with model: @section, url: owner_course_section_path(@section.chapter.course_id, @section) do |form| %>
     <div class="flex items-center justify-between">
-      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">編輯小節</h1>
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">新增小節</h1>
       <div>
-        <%= form.button class: "owner-course-btn" do %>
-          <i class="mr-4 fa-solid fa-arrow-rotate-right"></i>更新資訊
-        <% end %>
+        <%= form.submit "+ 編輯小節", class: "owner-course-btn" %>
       </div>
     </div>
-    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded">
+    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded"  data-controller=" uploads">
       <div class="flex items-center mb-4">
         <%= form.label :title, "小節標題", class: "flex-shrink-0 mr-4" %>
         <%= form.text_field :title %>
       </div>
-      <div class="flex items-center mb-4" id="drag-drop-area" data-controller=" uploads">
-        <%= form.label :media, "上傳影片", class: "flex-shrink-0 mr-4" %>
-        <div class="relative flex-grow">
-          <div class="absolute inset-y-0 opacity-50 pointer-events-none bg-secondary-400" data-uploads-target="progressbar" id="upload-progressbar">
+      <div class="flex justify-between">
+        <div class="flex items-center w-5/12 mb-4">
+          <%= form.label "發佈狀態", class: "flex-shrink-0 mr-4" %>
+          <%= form.select :published, Section.published_state %>
+        </div>
+        <div class="flex items-center w-1/2 mb-4" id="drag-drop-area" >
+          <div class="mx-2 owner-section-btn">
+            <%= form.label :media, "上傳影片", class: "flex-shrink-0 px-2" %>
           </div>
-          <div class="absolute hidden right-2 inset-y-2" id="progressPercent"> 
+          <div class="relative flex items-center justify-between owner-upload-div text-primary-300">
+            <span id="uploadfilename" class="px-2"><%= @section.media.filename %></span>
+            <span id="progressPercent" class="px-2 font-bold text-blue-600"></span>
+            <div class="absolute bottom-0 h-1 rounded-full pointer-events-none bg-primary-150 opacity-90 " data-uploads-target="progressbar" id="upload-progressbar">
+            </div>
           </div>
-          <%= form.file_field :media, direct_upload: true, data: { 'action': 'change->uploads#upload', 'uploads_target': 'mediaInput'}  do %>
-          <div>123</div>
-          <% end %>
         </div>
       </div>
-      <div class="flex items-center mb-4">
-        <%= form.label "發布狀態", class: "flex-shrink-0 mr-4" %>
-        <%= form.select :published, Section.published_state %>
+      <div class="">
+        <%= form.file_field :media, class:"hidden", direct_upload: true, data: { 'action': 'change->uploads#upload', 'uploads_target': 'mediaInput'} %>
       </div>
       <div class="flex items-center mb-4">
         <%= form.label :content, "課程內文", class: "flex-shrink-0 mr-4" %>

@@ -5,6 +5,7 @@ export default class extends Controller {
   
 
   initialize(){
+    const route = window.location.href.toString().split(window.location.host)[1] 
     const currentURL = window.location.href
     switch(currentURL){
       case this.coursesTarget.href:{
@@ -27,6 +28,10 @@ export default class extends Controller {
         this.ordersTarget.parentElement.classList.toggle("owner-current-page");
         break;
       }
+    }
+
+    if (route == '/owner/lecturers/new'){
+      this.lecturersTarget.parentElement.classList.toggle("owner-current-page");
     }
   }
 }

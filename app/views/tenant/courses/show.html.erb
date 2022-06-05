@@ -8,7 +8,7 @@
         <div class="flex">
           <% if student_signed_in? && current_student.bought?(@course) %>
             <%= link_to "進入觀看", order_path(@order), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" %>
-          <% else  %>
+          <% else %>
               <%= link_to payment_course_orders_path(@course), class: "inline-block px-6 py-3 mx-auto bg-warning-200 text-white rounded-full hover:bg-warning-100" do %>
               <i class="mr-4 fa-solid fa-cart-shopping"></i>現在購買只要$ <%= @course.price %>
             <% end %>
