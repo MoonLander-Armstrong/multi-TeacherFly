@@ -38,7 +38,7 @@ class Tenant::Owner::StudentsController < Tenant::BaseController
     @teacher = current_teacher
     @student = Student.new(student_params)
     if @student.save
-      SubscriptionMailer.registered_member(@student, @teacher).deliver
+      RegisteredMemberJob.perform_later(@student, @teacher)
       flash[:notice] = "成功新增學生資料"
     else
       flash[:alert] = "請重新輸入"

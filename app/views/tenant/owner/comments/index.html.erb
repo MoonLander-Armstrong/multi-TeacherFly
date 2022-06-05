@@ -50,14 +50,15 @@
 							<% end %>
 						</td>
 					</tr>
-					<tr class="hidden" data-ajaxForm-target="form">
-						<td colspan="5">
-							<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
-								<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
-								<%= form.text_area :content, placeholder: "在此輸入留言" %>
-								<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
-							<% end %>
-						</td>
+					<tr class="hidden bg-primary-100" data-ajaxForm-target="form">
+							<td colspan="3"></td>
+							<td colspan="2">
+								<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
+									<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
+									<%= form.text_area :content, placeholder: "在此輸入留言" %>
+									<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
+								<% end %>
+							</td>
 					</tr>
 				<% end %>
 			</tbody>
