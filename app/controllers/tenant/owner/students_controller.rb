@@ -4,7 +4,7 @@ class Tenant::Owner::StudentsController < Tenant::BaseController
 
   def index
     authorize :student
-    @students = Student.all.ordered
+    @students = Student.ordered.all
   end
 
   def information
@@ -38,7 +38,7 @@ class Tenant::Owner::StudentsController < Tenant::BaseController
     @teacher = current_teacher
     @student = Student.new(student_params)
     if @student.save
-      RegisteredMemberJob.perform_later(@student, @teacher)
+      SubscriptionMailer.registered_member(@student, @teacher).deliver
       flash[:notice] = "成功新增學生資料"
     else
       flash[:alert] = "請重新輸入"
