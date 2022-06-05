@@ -1,8 +1,17 @@
 <div class="fixed inset-x-0 flex px-4 py-3 text-3xl md:inset-y-0 md:w-64 md:block bg-primary-300 md:overflow-scroll">
   <label for="hamburger" class="md:hidden"><i class="fa-solid fa-bars"></i></label>
-  <div class="hidden w-24 h-24 mx-auto my-8 overflow-hidden rounded-full md:block">
-    <%= image_tag url_for(current_teacher.avatar), class: "w-full h-full object-cover" if current_teacher.avatar.attached? %>
-  </div>
+  <%= link_to edit_owner_schools_path do  %>
+    <div class="hidden w-24 h-24 mx-auto my-8 overflow-hidden rounded-full md:block">
+      <% if current_teacher.avatar.attached? %>
+        <%= image_tag url_for(current_teacher.avatar), class: "w-24 h-24 object-cover", data: { image_label_target: "preview" } %>
+      <% else %>
+      <div class="flex items-center justify-center w-24 h-24 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+          <i class="text-6xl fa-solid fa-user"></i>
+      </div>
+      <img class="hidden object-cover w-24 h-24" data-image-label-target="preview">
+      <% end %>
+    </div>
+  <% end %>
   <%= link_to owner_courses_path, class: "mx-auto hover:bg-primary-100" do %>
     <h1 class="text-center whitespace-nowrap"><%= current_teacher.username %>'s school</h1>
   <% end %>
