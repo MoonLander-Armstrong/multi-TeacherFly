@@ -1,11 +1,18 @@
 <article data-controller="ajaxForm">
   <div class="md:flex">
-    <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
-      <% if comment.student.nil? %>
-        <%= image_tag url_for(comment.teacher.avatar), class: "w-full h-full object-cover" if comment.teacher.avatar.attached? %>
-      <% else %>
-        <%= image_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" if comment.student.avatar.attached? %>
-      <% end %>
+    <div>
+      <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
+        <% if comment.student.nil? %>
+          <%= image_tag url_for(comment.teacher.avatar), class: "w-full h-full object-cover" if comment.teacher.avatar.attached? %>
+        <% else %>
+          <%= image_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" if comment.student.avatar.attached? %>
+        <% end %>
+      </div>
+      <% if comment.student.nil? && @course.teacher == comment.teacher %>
+      <span class="mx-4 border tag bg-rice text-primary-500 border-secondary-400">
+        講師
+      </span>
+      <% end %> 
     </div>
     <div class="comments <%= comment.student.nil? ? "comment-owner" : "comment-student" %>">
       <div class="flex items-center justify-between mb-4 text-primary-300">
