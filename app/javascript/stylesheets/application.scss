@@ -57,6 +57,40 @@ label.avatar-label {
   }
 }
 
+label.image-label {
+  div {
+    position: relative;
+
+    &::before {
+      content: "點擊編輯圖片";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      line-height: 160px;
+      text-align: center;
+      background-color: transparent;
+      opacity: 0;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      line-height: 160px;
+      background-color: black;
+      opacity: 0;
+    }
+
+    &:hover::before {
+      opacity: 100%;
+    }
+
+    &:hover::after {
+      opacity: 30%;
+    }
+  }
+}
+
 input {
   @apply w-full px-3 py-1 mt-1 mb-3 border bg-gray-50 border-primary-300 rounded;
 
