@@ -23,10 +23,6 @@ class CoursePolicy < ApplicationPolicy
     teacher
   end
 
-  def comments?
-    teacher
-  end
-
   def curriculum?
     teacher
   end

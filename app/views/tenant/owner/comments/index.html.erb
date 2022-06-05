@@ -7,7 +7,7 @@
 			</div>
       <div>
         <%= form_tag owner_comments_path, method: :get, data: { controller: "order-time"} do%>
-				<%= select_tag :course, options_for_select(current_user.courses.pluck(:title, :id).unshift(["全部", 0]), @course_option), data: { action: "change->order-time#select"}%>
+				<%= select_tag :course, options_for_select(Course.pluck(:title, :id).unshift(["全部", 0]), @course_option), data: { action: "change->order-time#select"}%>
 			<% end %>
       </div>
 		</div>
@@ -16,7 +16,7 @@
 				<tr>
 					<th class="text-left owner-text">留言</th>
 					<th class="text-center owner-text">留言者</th>
-					<th class="text-center owner-text">留言者</th>
+					<th class="text-center owner-text">課程</th>
 					<th class="text-center owner-text">章節/小節</th>
 					<th class="text-center owner-text">即時回覆</th>
 				</tr>
@@ -30,7 +30,7 @@
 							</span>
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
-							<%= comment.user.username %>
+							<%= comment.student.nil? ? comment.teacher.username : comment.student.username %>
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
 							<%= comment.course.title %>

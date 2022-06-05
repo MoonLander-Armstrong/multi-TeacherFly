@@ -9,6 +9,6 @@ class Tenant::CommentsController < Tenant::BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:content, :parent_id).merge(user: current_user, course: @course)
+    params.require(:comment).permit(:content, :parent_id).merge(student: current_student, course: @course)
   end
 end

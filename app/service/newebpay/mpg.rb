@@ -33,8 +33,8 @@ module Newebpay
       info[:LoginType] = 0
 
       # 選填欄位
-      # info[:ReturnURL] = "https://2bcb-220-133-132-50.jp.ngrok.io/orders/payment_response"
-      info[:ReturnURL] = "http://e85cb9.lvh.me:3000/orders/payment_response"
+      info[:ReturnURL] = "http://6ec834.lvh.me:3000/orders/payment_response"
+      info[:ReturnURL] = "http://#{MultiTenantSupport.current_tenant.subdomain}.lvh.me:3000/orders/payment_response"
       info[:NotifyURL] = ""
       info[:Email] = order.student.email
       info[:CREDIT] = 1

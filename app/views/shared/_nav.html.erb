@@ -13,7 +13,7 @@
       <% end %>
     </button>
     <ul class="login-area admin fade fade-out absolute top-full inset-x-0 sm:hidden" data-navbar-target="navList">
-      <li><%= link_to '進入後台', owner_courses_url(subdomain: current_teacher.subdomain) %></li>
+      <li><%= link_to '進入後台', teacher_auto_sign_in_url(subdomain: current_teacher.subdomain) %></li>
       <li><%= link_to '登出', destroy_teacher_session_path, method: "delete" %></li>
     </ul>
   <% else %>
@@ -37,7 +37,7 @@
       <% end %>
     </button>
     <ul class="login-area admin absolute top-full hidden right-4 w-40 mt-4 rounded overflow-hidden" data-navbar-target="dropdownList">
-      <li><%= link_to '進入後台', owner_courses_url(subdomain: current_teacher.subdomain) %></li>
+      <li><%= link_to '進入後台', teacher_auto_sign_in_url(subdomain: current_teacher.subdomain) %></li>
       <li><%= link_to '登出', destroy_teacher_session_path, method: "delete" %></li>
     </ul>
   <% else %>

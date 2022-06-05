@@ -49,8 +49,6 @@ class Tenant::Owner::CoursesController < Tenant::BaseController
 
   def information; end
 
-  def comments; end
-
   private
 
   def find_course

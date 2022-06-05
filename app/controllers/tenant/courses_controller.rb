@@ -2,7 +2,6 @@
 
 class Tenant::CoursesController < Tenant::BaseController
   def index
-    sign_in MultiTenantSupport.current_tenant
     @courses = Course.published.order(id: :desc)
     @lecturers = Lecturer.all
     @courses = @courses.search(params[:search]) if params[:search]

@@ -10,11 +10,6 @@
         <i class="font-medium fa-solid fa-greater-than"></i>章節內容
       <% end %>
     </li>
-    <li>
-      <%= link_to comments_owner_course_path(@course) do %>
-        <i class="font-medium fa-solid fa-greater-than"></i>留言管理
-      <% end %>
-    </li>
   </ul>
 <% end %>
 
@@ -36,7 +31,7 @@
 				</tr>
 			</thead>
 			<tbody class="owner-tbody" data-controller="ajaxForm">
-				<% Comment.where(course_id: @course.id).includes(:section, :user).order(id: :desc).each do |comment| %>
+				<% Comment.where(course_id: @course.id).includes(:section, :student).order(id: :desc).each do |comment| %>
 					<tr class="transition hover:bg-primary-200">
 						<td class="text-left owner-text text-primary-500">
 							<span class="overflow-hidden w-44 whitespace-nowrap overflow-ellipsis">
@@ -44,7 +39,7 @@
 							</span>
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
-							<%= comment.user.username %>
+							<%= comment.student.username %>
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
 							<%= comment.section.chapter.title %> / <%= comment.section.title %>
