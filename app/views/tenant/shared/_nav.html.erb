@@ -1,18 +1,18 @@
-<nav class="home-nav md:container sm:px-6 md:mx-auto flex items-center" data-controller="navbar">
+<nav class="flex items-center home-nav md:container sm:px-6 md:mx-auto" data-controller="navbar">
   <%= link_to root_path, class: "logo" do %>
     <%= image_tag "logo/logo-icon-student", class:"xs:hidden h-full p-2" %>
     <%= image_tag "logo/logo-student", class:"hidden xs:block h-full pt-2" %>
   <% end %>
   <%# navbar of mobile straight %>
   <% if student_signed_in? %>
-    <button class="absolute right-4 flex sm:hidden justify-center items-center w-8 h-8 bg-gray-300 overflow-hidden rounded-full" data-action="click->navbar#toggleNavList">
+    <button class="absolute flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-300 rounded-full right-4 sm:hidden" data-action="click->navbar#toggleNavList">
       <% if current_student.avatar.attached? %>
-        <%= image_tag url_for(student.avatar) %>
+        <%= image_tag url_for(current_student.avatar) %>
       <% else %>
         <i class="fa-solid fa-user"></i>
       <% end %>
     </button>
-    <ul class="login-area teacher fade fade-out absolute top-full inset-x-0 sm:hidden" data-navbar-target="navList">
+    <ul class="absolute inset-x-0 login-area teacher fade fade-out top-full sm:hidden" data-navbar-target="navList">
       <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
@@ -22,26 +22,26 @@
         <i class="fa-solid fa-bars"></i>
       </div>
     </button>
-    <ul class="login-area teacher fade fade-out absolute top-full inset-x-0" data-navbar-target="navList">
+    <ul class="absolute inset-x-0 login-area teacher fade fade-out top-full" data-navbar-target="navList">
       <li><%= link_to '註冊', new_registration_path(:student) %></li>
       <li><%= link_to '登入', new_session_path(:student) %></li>
     </ul>
   <% end %>
 <%# navbar of mobile horizontal & up %>
   <% if student_signed_in? %>
-    <button class="hidden sm:block w-8 h-8 bg-gray-300 overflow-hidden rounded-full" data-action="click->navbar#toggleDropdownList">
+    <button class="hidden w-8 h-8 overflow-hidden bg-gray-300 rounded-full sm:block" data-action="click->navbar#toggleDropdownList">
       <% if current_student.avatar.attached? %>
-        <%= image_tag url_for(student.avatar) %>
+        <%= image_tag url_for(current_student.avatar) %>
       <% else %>
         <i class="fa-solid fa-user"></i>
       <% end %>
     </button>
-    <ul class="login-area teacher absolute top-full hidden right-4 w-40 mt-4 rounded overflow-hidden" data-navbar-target="dropdownList">
+    <ul class="absolute hidden w-40 mt-4 overflow-hidden rounded login-area teacher top-full right-4" data-navbar-target="dropdownList">
       <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
   <% else %>
-    <ul class="login-area teacher hidden sm:flex">
+    <ul class="hidden login-area teacher sm:flex">
       <li><%= link_to '註冊', new_registration_path(:student), class: "md:mr-2" %></li>
       <li><%= link_to '登入', new_session_path(:student), class: "md:mr-2" %></li>
     </ul>

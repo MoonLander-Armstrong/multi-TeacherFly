@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_194847) do
   create_table "comments", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "section_id", null: false
-    t.bigint "student_id", null: false
+    t.bigint "student_id"
     t.bigint "course_id", null: false
     t.text "content"
     t.integer "parent_id"
@@ -196,7 +196,6 @@ ActiveRecord::Schema.define(version: 2022_06_04_194847) do
   add_foreign_key "chapters", "courses"
   add_foreign_key "comments", "courses"
   add_foreign_key "comments", "sections"
-  add_foreign_key "comments", "students"
   add_foreign_key "orders", "courses"
   add_foreign_key "orders", "students"
   add_foreign_key "reads", "sections"
