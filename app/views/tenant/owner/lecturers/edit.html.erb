@@ -1,6 +1,6 @@
 <%= content_for :lecturer do %>
   <ul class="sidebar-list">
-    <li>
+    <li class="owner-current-page">
       <%= link_to edit_owner_lecturer_path(@lecturer) do %>
         <i class="font-medium fa-solid fa-greater-than"></i>講師資訊
       <% end %>
@@ -21,20 +21,20 @@
     </div>
     <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded lg:flex lg:justify-evenly">
       <div class="lg:mr-4">
-        <div class="w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full field tt" data-controller="avatar-label">
+        <div class="w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full field tt" data-controller="image-label">
           <%= form.label :mugshot, class: "avatar-label relative block w-40 h-40 rounded-full overflow-hidden cursor-pointer" do %>
             <div class="absolute inset-0 w-40 h-40 mx-auto text-white">
               <% if @lecturer.mugshot.attached? %>
-                <%= image_tag url_for(@lecturer.mugshot), class: "w-40 h-40 object-cover", data: { avatar_label_target: "preview" } %>
+                <%= image_tag url_for(@lecturer.mugshot), class: "w-40 h-40 object-cover", data: { image_label_target: "preview" } %>
               <% else %>
-                <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-avatar-label-target="fakeImg">
+                <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
                   <i class="text-6xl fa-solid fa-user"></i>
                 </div>
-                <img class="hidden object-cover w-40 h-40" data-avatar-label-target="preview">
+                <img class="hidden object-cover w-40 h-40" data-image-label-target="preview">
               <% end %>
             </div>
           <% end %>
-          <%= form.file_field :mugshot, class: "hidden", data: { action: "change->avatar-label#loadImg", avatar_label_target: "fileInput" } %>
+          <%= form.file_field :mugshot, class: "hidden", data: { action: "change->image-label#loadImg", image_label_target: "fileInput" } %>
         </div>
         <div>
           <div class="flex items-center mb-4">
