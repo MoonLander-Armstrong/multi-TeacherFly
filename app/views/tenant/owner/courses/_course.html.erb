@@ -2,7 +2,7 @@
   <td class="text-left owner-text text-primary-500">
     <div class="flex items-center">
       <div class="mr-2">
-        <span class="text-lg text-primary underline hover:text-primary-200"><%= link_to course.title, information_owner_course_path(course) %></span>
+        <span class="text-lg underline text-primary hover:text-primary-200"><%= link_to course.title, information_owner_course_path(course) %></span>
       </div>
     </div>
   </td>
@@ -21,7 +21,7 @@
   <td class="px-6 py-3 text-center">
     <div class="flex justify-center item-center">
       <div class="w-4 mr-2">
-        <span>0</span>
+        <span><%= course.orders.count %></span>
       </div>
     </div>
   </td>
