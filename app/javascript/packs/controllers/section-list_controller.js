@@ -5,15 +5,14 @@ export default class extends Controller {
   static targets = [
     "sectionDropdown",
     "loading",
-    "loadingCircle",
     "progressBar",
     "progress",
     "videoFinished",
     "section",
     "finishedIcon",
-    "unfinishedIcon"
+    "unfinishedIcon",
   ];
-  
+
   initialize() {
     const sendWidth = new CustomEvent("sendWidth", {
       detail: { progressBarWidth: "0%" },
@@ -22,28 +21,14 @@ export default class extends Controller {
   }
 
   connect() {
-      // progressbarWidth
+    // progressbarWidth
     this.progressBarTarget.style.setProperty(
       "--progressBar-width",
       `${this.progressBarTarget.dataset.progressbar}%`
     );
 
     // loading block
-    function addDot(target) {
-      let dotArr = target.textContent.split("g")[1];
-      if (dotArr.length === 3) {
-        target.textContent = "Loading";
-        return;
-      }
-      target.textContent += ".";
-    }
-
-    const intervalTimer = setInterval(() => {
-      addDot(this.loadingCircleTarget);
-    }, 300);
-
     setTimeout(() => {
-      clearInterval(intervalTimer);
       const modal = this.loadingTarget.children[0];
       const circle = this.loadingTarget.children[1];
       this.loadingTarget.removeChild(modal);
@@ -74,35 +59,37 @@ export default class extends Controller {
   }
 
   videoFinished() {
-    const video = this.videoFinishedTarget
-    const { sendWidthEvent } = this.sectionTarget
-    const finishedIconTargets = Array.from(this.finishedIconTargets)
-    const unfinishedIconTargets = Array.from(this.unfinishedIconTargets)
-    
+    const video = this.videoFinishedTarget;
+    const { sendWidthEvent } = this.sectionTarget;
+    const finishedIconTargets = Array.from(this.finishedIconTargets);
+    const unfinishedIconTargets = Array.from(this.unfinishedIconTargets);
+
     const data = new FormData();
     data.append("finished", true);
     data.append("sectionId", `${video.dataset.sectionId}`);
-    
-    var finishedIconTarget = finishedIconTargets.find((e)=> e.dataset.sectionId == video.dataset.sectionId)
-    var unfinishedIconTarget = unfinishedIconTargets.find((e)=> e.dataset.sectionId == video.dataset.sectionId)
 
+    var finishedIconTarget = finishedIconTargets.find(
+      (e) => e.dataset.sectionId == video.dataset.sectionId
+    );
+    var unfinishedIconTarget = unfinishedIconTargets.find(
+      (e) => e.dataset.sectionId == video.dataset.sectionId
+    );
 
-      Rails.ajax({
-        url: `/api/v1/courses/${video.dataset.courseId}/sections/${video.dataset.sectionSlugId}/finished`,
-        type: "patch",
-        data,
-        success: function ({ progress, finished }) {
-          if (finished[0]) {
-            finishedIconTarget.classList.remove("hidden");
-            unfinishedIconTarget.classList.add("hidden");
-          } else {
-            finishedIconTarget.classList.add("hidden");
-            unfinishedIconTarget.classList.remove("hidden");
-          }
-          sendWidthEvent.detail.progressBarWidth = progress;
-          document.dispatchEvent(sendWidthEvent);
-        },
-      });
-    // })
+    Rails.ajax({
+      url: `/api/v1/courses/${video.dataset.courseId}/sections/${video.dataset.sectionSlugId}/finished`,
+      type: "patch",
+      data,
+      success: function ({ progress, finished }) {
+        if (finished[0]) {
+          finishedIconTarget.classList.remove("hidden");
+          unfinishedIconTarget.classList.add("hidden");
+        } else {
+          finishedIconTarget.classList.add("hidden");
+          unfinishedIconTarget.classList.remove("hidden");
+        }
+        sendWidthEvent.detail.progressBarWidth = progress;
+        document.dispatchEvent(sendWidthEvent);
+      },
+    });
   }
 }
