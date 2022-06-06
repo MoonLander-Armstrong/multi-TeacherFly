@@ -25,14 +25,6 @@
   }
 
   .fade {
-    @apply overflow-hidden transition-all ease-linear duration-200;
-  }
-
-  .fade-out {
-    @apply h-0;
-  }
-
-  .fade-in {
-    @apply h-32;
+    transform: scaleY(0);
   }
 }

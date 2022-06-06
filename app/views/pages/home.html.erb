@@ -7,14 +7,14 @@
       <div class="px-8 text-primary-300 lg:w-2/5 lg:flex lg:flex-col lg:justify-center lg:items-start">
         <h1 class="mb-12 text-5xl leading-tight"><span class="font-black">Share</span> What You <span class="text-secondary-400 font-black">Know</span>.</h1>
         <p class="mb-8 text-xl">分享你的知識，打造屬於你自己的專屬平台吧！</p>
-        <div class="relative">
-        <%= link_to "Let's GO!!!", new_teacher_session_path, class: "inline-block px-6 py-3 bg-secondary-400 hover:bg-secondary-300 text-white hover:text-secondary-500 rounded-md" unless teacher_signed_in? %>
-        <div class="size absolute">
-          <%= image_tag "aircraft" %>
-          <div class="dot" style="--i: 1"></div>
-          <div class="dot" style="--i: 2"></div>
-          <div class="dot" style="--i: 3"></div>
-        </div>
+        <div class="flex">
+          <%= link_to "Let's GO!!!", new_teacher_session_path, class: "inline-block px-6 py-3 bg-secondary-400 hover:bg-secondary-300 text-white hover:text-secondary-500 rounded-md" unless teacher_signed_in? %>
+          <div class="size relative">
+            <%= image_tag "aircraft" %>
+            <div class="dot" style="--i: 1"></div>
+            <div class="dot" style="--i: 2"></div>
+            <div class="dot" style="--i: 3"></div>
+          </div>
         </div>
       </div>
       <div class="lg:w-3/5">

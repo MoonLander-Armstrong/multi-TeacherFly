@@ -15,9 +15,9 @@
 
 <div class="relative min-h-screen py-10 owner-main-container">
   <div class="w-11/12 mx-auto">
-  <%= form_with model: @section, url: owner_course_section_path(@section.chapter.course_id, @section) do |form| %>
+  <%= form_with model: @section, url: owner_course_section_path(@section.chapter.course_id, @section), class: "form" do |form| %>
     <div class="flex items-center justify-between">
-      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">新增小節</h1>
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">更新小節</h1>
       <div>
         <%= form.submit "+ 編輯小節", class: "owner-course-btn" %>
       </div>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <div class="">
+      <div>
         <%= form.file_field :media, class:"hidden", direct_upload: true, data: { 'action': 'change->uploads#upload', 'uploads_target': 'mediaInput'} %>
       </div>
       <div class="flex items-center mb-4">

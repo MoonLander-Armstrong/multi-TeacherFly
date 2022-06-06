@@ -8,8 +8,7 @@ export default class extends Controller {
   }
 
   toggleNavList() {
-    this.navListTarget.classList.toggle("fade-out");
-    this.navListTarget.classList.toggle("fade-in");
+    this.navListTarget.classList.toggle("fade");
   }
 
   toggleDropdownList(e) {
