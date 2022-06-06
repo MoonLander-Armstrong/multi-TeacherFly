@@ -68,8 +68,34 @@
     <div class="container mx-auto">
       <h1 class="mb-8 text-3xl text-primary-300"><%= @section.title %></h1>
       <div class="section-media" data-section-list-target="loading">
-        <div class="loading">Loading...</div>
-        <div class="lds-ring"><div></div><div></div><div></div><div></div><span class="text-xl font-bold" data-section-list-target="loadingCircle">Loading</span></div>
+        <div class="loadingArea">
+          <div class="loader">
+            <span style="--i:1;"></span>
+            <span style="--i:2;"></span>
+            <span style="--i:3;"></span>
+            <span style="--i:4;"></span>
+            <span style="--i:5;"></span>
+            <span style="--i:6;"></span>
+            <span style="--i:7;"></span>
+            <span style="--i:8;"></span>
+            <span style="--i:9;"></span>
+            <span style="--i:10;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:20;"></span> 
+            <div class="rocket">
+              <%= image_tag "aircraft.png" %>
+            </div>
+          </div>
+        </div>
+        <div><span data-section-list-target="loadingCircle"></span></div>
         <%= video_tag url_for(@section.media), id: "myVideo", controls: true, controlsList: "nodownload", autoplay: "autoplay", data: { action: "ended->section-list#videoFinished", section_list_target: "videoFinished", course_id: @course.friendly_id, section_slug_id: @section.friendly_id, section_id: @section.id } if @section.media.attached? %>
       </div>
       <p class="mt-4"><%= markdown(@section.content)%></p>
