@@ -5,10 +5,13 @@
 			<div class="w-1/3 mx-4 mr-auto">
 				<%= render "shared/flash" %>  
 			</div>
-      <div>
-        <%= form_tag owner_comments_path, method: :get, data: { controller: "order-time"} do%>
-				<%= select_tag :course, options_for_select(Course.pluck(:title, :id).unshift(["全部", 0]), @course_option), data: { action: "change->order-time#select"}%>
-			<% end %>
+      <div class="flex">
+				<div class="mt-1 mr-2 font-semibold text-primary-300">選擇課程</div>
+        <div>
+					<%= form_tag owner_comments_path, method: :get, data: { controller: "order-time"} do%>
+					<%= select_tag :course, options_for_select(Course.pluck(:title, :id).unshift(["全部", 0]), @course_option), data: { action: "change->order-time#select"}%>
+					<% end %>
+				</div>
       </div>
 		</div>
 		<table class="mt-6 overflow-hidden rounded-md shadow-md owner-table comment-table">
@@ -38,8 +41,8 @@
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
 							<%= comment.section.chapter.title %> / <%= comment.section.title %>
 						</td>
-						<td class="flex items-center px-2">
-							<button class="mr-auto tag tag-safe" data-action="click->ajaxForm#toggle">回覆</button>
+						<td class="flex items-center justify-center">
+							<button class="tag tag-safe" data-action="click->ajaxForm#toggle">回覆</button>
 							<%= link_to owner_comment_path(comment), method: "delete", data: { confirm: "確定刪除此留言嗎？" }, class: "block p-2 text-red-400 hover:text-red-600" do %>
 								<svg xmlns="http://www.w3./2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -47,14 +50,15 @@
 							<% end %>
 						</td>
 					</tr>
-					<tr class="hidden" data-ajaxForm-target="form">
-						<td colspan="5">
-							<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
-								<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
-								<%= form.text_area :content, placeholder: "在此輸入留言" %>
-								<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
-							<% end %>
-						</td>
+					<tr class="hidden bg-primary-100" data-ajaxForm-target="form">
+							<td colspan="3"></td>
+							<td colspan="2">
+								<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
+									<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
+									<%= form.text_area :content, placeholder: "在此輸入留言" %>
+									<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
+								<% end %>
+							</td>
 					</tr>
 				<% end %>
 			</tbody>

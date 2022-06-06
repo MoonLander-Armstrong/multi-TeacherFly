@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
       # back stage
       namespace :owner do # remember add path: "qwerttyasad"
+        resource :schools, only: [:edit, :update]
         resources :lecturers
         resources :courses do
           member do

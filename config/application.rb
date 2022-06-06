@@ -13,7 +13,7 @@ module Teacherfly
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.i18n.default_locale = 'zh-TW'
-    config.hosts << ENV["host_name"]
+    config.hosts << ENV["HOST_NAME"]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -1,6 +1,6 @@
 <%= content_for :course do %>
   <ul class="sidebar-list">
-    <li>
+    <li class="owner-current-page">
       <%= link_to information_owner_course_path(@course) do %>
         <i class="font-medium fa-solid fa-greater-than"></i>課程內容
       <% end %>
@@ -22,9 +22,21 @@
       </div>
     </div>
     <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded">
-      <div class="flex items-center mb-4">
-        <%= form.label :image, "課程圖片", class: "flex-shrink-0 mr-4" %>
-        <%= form.file_field :image %>
+      <div class="flex items-center justify-between mb-4" data-controller="image-label">
+       <div class="">課程圖片</div>
+        <%= form.label :image, class: "image-label relative block cursor-pointer w-11/12  right-1" do %>
+          <div class="absolute inset-0 mx-auto text-white">
+            <% if @course.image.attached? %>
+              <%= image_tag url_for(@course.image), class: "object-cover w-full h-72", data: { image_label_target: "preview" } %>
+            <% else %>
+              <div class="flex items-center justify-center overflow-hidden bg-gray-300" data-image-label-target="fakeImg">
+                <i class=" fa-solid fa-mountain-sun text-9xl"></i>
+              </div>
+              <img src="" class="hidden object-cover w-full h-72" data-image-label-target="preview">
+            <% end %>
+          </div>
+        <% end %>
+        <%= form.file_field :image, class: "hidden", data: { action: "change->image-label#loadImg", image_label_target: "fileInput" } %>
       </div>
       <div class="flex items-center mb-4">
         <%= form.label :title, "課程標題", class: "flex-shrink-0 mr-4" %>

@@ -3,8 +3,8 @@ module Newebpay
     attr_reader :status, :message, :result, :order_no, :trans_no, :merchant_id, :amount, :payment_type, :respond_type, :paytime, :trade_ip, :escrow_bank, :auth_bank, :respond_code, :auth, :card6_no, :card4_no, :payment_method
 
     def initialize(params)
-      @key = ENV["newebpay_key"]
-      @iv = ENV["newebpay_iv"]
+      @key = ENV["NEWEBPAY_KEY"]
+      @iv = ENV["NEWEBPAY_IV"]
 
       response = decrypy(params)
       @status = response['Status']

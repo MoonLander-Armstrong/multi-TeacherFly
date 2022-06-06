@@ -1,6 +1,6 @@
 <%= content_for :user do %>
   <ul class="sidebar-list">
-    <li>
+    <li class="owner-current-page">
       <%= link_to information_owner_student_path(@student) do %>
         <i class="font-medium fa-solid fa-greater-than"></i>會員詳細資料
       <% end %>
@@ -23,20 +23,20 @@
       <div class="md:flex">
         <div class="self-start p-8 bg-white rounded md:w-1/2 md:mr-2">
           <div class="mb-4 lg:flex lg:items-center lg:mb-0">
-            <div class="flex-shrink-0 w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full lg:mb-0 lg:mx-4 field" data-controller="avatar-label">
+            <div class="flex-shrink-0 w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full lg:mb-0 lg:mx-4 field" data-controller="image-label">
               <%= form.label :avatar, class: "avatar-label relative block w-40 h-40 rounded-full overflow-hidden cursor-pointer" do %>
                 <div class="absolute inset-0 w-40 h-40 mx-auto text-white">
                   <% if @student.avatar.attached? %>
-                    <%= image_tag url_for(@student.avatar), class: "w-40 h-40 object-cover", data: { avatar_label_target: "preview" } %>
+                    <%= image_tag url_for(@student.avatar), class: "w-40 h-40 object-cover", data: { image_label_target: "preview" } %>
                   <% else %>
-                    <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-avatar-label-target="fakeImg">
+                    <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
                       <i class="text-6xl fa-solid fa-user"></i>
                     </div>
-                    <img src="" class="hidden object-cover w-40 h-40" data-avatar-label-target="preview">
+                    <img src="" class="hidden object-cover w-40 h-40" data-image-label-target="preview">
                   <% end %>
                 </div>
               <% end %>
-              <%= form.file_field :avatar, class: "hidden", data: { action: "change->avatar-label#loadImg", avatar_label_target: "fileInput" } %>
+              <%= form.file_field :avatar, class: "hidden", data: { action: "change->image-label#loadImg", image_label_target: "fileInput" } %>
             </div>
             <div>
               <div class="flex items-center mb-4">
@@ -65,13 +65,19 @@
               </tbody>
             </table>
           </div>
-          <div class="h-20 mt-6 border rounded-md bg-secondary-200">
+          <div class="mt-6 border rounded-md bg-secondary-200 ">
             <% if @orders.length === Course.published.length %>
-              <span>此學生已經擁有您的全部課程</span>
+              <span class="block py-4 text-xl font-semibold text-center text-primary-400">此學生已經擁有您的全部課程 !!</span>
             <% else %>
               <%= form_with(model: @order, url: subscription_owner_student_path(@student), method: :post) do |form| %>
-              <%= form.select :course_id, (Course.published - @student.orders.map { |order| order.course }).pluck(:title, :id) %>
-              <%= form.submit %>
+                <div class="p-8 border border-gray-300 rounded bg-secondary-200">
+                  <div class="flex items-center justify-center">
+                    <div class="w-2/3">
+                      <%= form.select :course_id, (Course.published - @student.orders.map { |order| order.course }).pluck(:title, :id), { include_blank: "選擇您要贈送的課程" }%>
+                    </div>
+                      <%= form.button "贈送", class: "owner-course-btn flex items-center ml-5" %>
+                  </div>
+                </div>
               <% end %>
             <% end %>
           </div>
@@ -79,3 +85,5 @@
       </div>
   </div>
 </div>
+
+

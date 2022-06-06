@@ -17,8 +17,6 @@ class Tenant::Owner::CommentsController < Tenant::BaseController
     @section = Section.find(params[:section_id])
     @comment = @section.comments.new(comment_params)
     redirect_to owner_comments_path, notice: "新增留言成功!" if @comment.save
-    p "-" * 50
-    p @comment.errors.full_messages
   end
 
   def destroy
