@@ -7,7 +7,7 @@
   <% if teacher_signed_in? %>
     <button class="absolute flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-300 rounded-full right-4 sm:hidden" data-action="click->navbar#toggleNavList">
       <% if current_teacher.avatar.attached? %>
-        <%= image_tag url_for(teacher.avatar) %>
+        <%= image_tag url_for(current_teacher.avatar) %>
       <% else %>
         <i class="fa-solid fa-user"></i>
       <% end %>
@@ -31,7 +31,7 @@
   <% if teacher_signed_in? %>
     <button class="hidden w-8 h-8 overflow-hidden bg-gray-300 rounded-full sm:block" data-action="click->navbar#toggleDropdownList">
       <% if current_teacher.avatar.attached? %>
-        <%= image_tag url_for(teacher.avatar) %>
+        <%= image_tag url_for(current_teacher.avatar) %>
       <% else %>
         <i class="fa-solid fa-user"></i>
       <% end %>
