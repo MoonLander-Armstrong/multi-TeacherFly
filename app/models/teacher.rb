@@ -3,7 +3,7 @@ class Teacher < ApplicationRecord
 
   # devise setting
   devise :database_authenticatable, :registerable,
-        :recoverable, :rememberable, :validatable,
+        :recoverable, :rememberable,
         :omniauthable, omniauth_providers: [:google_oauth2]
 
   # 定義類別方法，找到user的話就登入，找不到就建立user
@@ -20,6 +20,10 @@ class Teacher < ApplicationRecord
   # validates
   validates :username, length: { maximum: 20 }
   validates :school_name, length: { maximum: 8 }
+  validates :subdomain, presence: true,
+                        uniqueness: true,
+                        length: { minimum: 3, maximum: 10 },
+                        format: { with: /\A[a-z, 0-9]{3,10}\z/ }
 
   # relationship
   has_many :students
