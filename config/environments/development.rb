@@ -43,7 +43,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              ENV['MAILGUN_ADDRESS'],
-    port:                 ENV['PORT'],
+    port:                 ENV['MAILGUN_PORT'],
     domain:               ENV['DOMAIN'],
     user_name:            ENV['MAILGUN_USER_NAME'],
     password:             ENV['MAILGUN_PASSWORD'],

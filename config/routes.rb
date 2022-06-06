@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     scope module: "tenant" do
       root to: "courses#index", as: "teacher_root"
       get "teacher_auto_sign_in", to: "pages#auto_sign_in"
+      get "teacher_update_sign_in", to: "pages#update_sign_in"
       devise_scope :student do
         delete "students/log_out", to: "students/sessions#log_out"
       end
