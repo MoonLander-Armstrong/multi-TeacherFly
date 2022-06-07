@@ -12,7 +12,7 @@
         <i class="fa-solid fa-user"></i>
       <% end %>
     </button>
-    <ul class="absolute inset-x-0 login-area admin fade fade-out top-full sm:hidden" data-navbar-target="navList">
+    <ul class="absolute inset-x-0 login-area admin fade top-full sm:hidden tranition-all duration-200 origin-top" data-navbar-target="navList">
       <li><%= link_to '進入後台', teacher_auto_sign_in_url(subdomain: current_teacher.subdomain) %></li>
       <li><%= link_to '登出', destroy_teacher_session_path, method: "delete" %></li>
     </ul>
@@ -22,7 +22,7 @@
         <i class="fa-solid fa-bars"></i>
       </div>
     </button>
-    <ul class="absolute inset-x-0 login-area admin fade fade-out top-full" data-navbar-target="navList">
+    <ul class="absolute inset-x-0 login-area admin fade top-full tranition-all duration-200 origin-top" data-navbar-target="navList">
       <li><%= link_to '免費體驗', new_registration_path(:teacher) %></li>
       <li><%= link_to '登入', new_session_path(:teacher) %></li>
     </ul>
