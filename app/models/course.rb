@@ -33,7 +33,7 @@ class Course < ApplicationRecord
 
   def self.search(search)
     if search
-      where('title LIKE ? OR description LIKE ?', "%#{search}%", "%#{search}%")
+      where('LOWER(title) LIKE ? OR LOWER(description) LIKE ?', "%#{search.downcase}%", "%#{search.downcase}%")
     else
       all
     end

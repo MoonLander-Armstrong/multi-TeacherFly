@@ -4,7 +4,7 @@
     <ul class="invisible w-full dropdown" data-search-target="option">
     <% @lecturers.each do |lecturer|%>
       <li>
-        <a><%= link_to lecturer.name, lecturer_path(lecturer) %></a>
+        <%= link_to lecturer.name, lecturer_path(lecturer), class: "dropdown-name" %>
       </li>
     <% end %>
     </ul>
