@@ -7,18 +7,23 @@ Rails.application.routes.draw do
       root to: "courses#index", as: "teacher_root"
       get "teacher_auto_sign_in", to: "pages#auto_sign_in"
       get "teacher_update_sign_in", to: "pages#update_sign_in"
-      devise_scope :student do
-        delete "students/log_out", to: "students/sessions#log_out"
-      end
+      get "owner/preview", to: "courses#index"
       devise_for :students,
                   controllers: {
                     sessions: 'tenant/students/sessions',
                     registrations: 'tenant/students/registrations',
+                    passwords: 'tenant/students/passwords'
                   }
+
+      devise_scope :student do
+        delete "students/log_out", to: "students/sessions#log_out"
+        get "students/information", to: "students/registrations#information"
+        patch "students/information", to: "students/registrations#information_update"
+      end
 
       # front stage
       resources :lecturers, only: [:show]
-      resources :courses, only: %i[index show]do
+      resources :courses, only: %i[index show] do
         resources :orders, only: [] do
           collection do
             get :payment
@@ -35,7 +40,7 @@ Rails.application.routes.draw do
       end
 
       # back stage
-      namespace :owner do # remember add path: "qwerttyasad"
+      namespace :owner do
         resource :schools, only: [:edit, :update]
         resources :lecturers
         resources :courses do
@@ -59,7 +64,7 @@ Rails.application.routes.draw do
           end
         end
         resources :comments, only: [:index]
-        resources :orders, only: [:index] do 
+        resources :orders, only: [:index] do
         end
       end
 
@@ -84,6 +89,6 @@ Rails.application.routes.draw do
               controllers: {
                 omniauth_callbacks: 'teachers/omniauth_callbacks',
                 sessions: 'teachers/sessions',
-                registrations: 'teachers/registrations',
+                registrations: 'teachers/registrations'
               }
 end

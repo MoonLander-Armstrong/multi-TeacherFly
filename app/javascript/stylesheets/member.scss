@@ -1,10 +1,5 @@
 // teacher-view
 .teacher-member {
-  &::before {
-    content: "";
-    @apply absolute inset-x-0 bottom-0 h-4 bg-secondary-400;
-  }
-
   input[type="text"],
   input[type="email"],
   input[type="password"] {
