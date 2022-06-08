@@ -32,13 +32,8 @@
 								<%= comment.content %>
 							</span>
 						</td>
-						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
-							<% if comment.student.nil? %>
-								<%= comment.teacher.username %>
-							<% else %>
-								<%= comment.student.username %>		
-								<span class="px-1 py-1 text-sm text-white rounded-full bg-secondary-300">學生</span>
-							<% end %>
+						<td class="text-center owner-text whitespace-nowrap text-primary-500">
+							<%= comment.student.nil? ? comment.teacher.username : comment.student.username %>	
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
 							<%= comment.course.title %>
@@ -56,14 +51,14 @@
 						</td>
 					</tr>
 					<tr class="hidden data-ajaxForm-target="form">
-							<td colspan="3"></td>
-							<td colspan="2">
-								<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
-									<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
-									<%= form.text_area :content, placeholder: "在此輸入留言" %>
-									<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
-								<% end %>
-							</td>
+						<td colspan="3"></td>
+						<td colspan="2">
+							<%= form_with(url: owner_course_section_comments_path(comment.course, comment.section), scope: "comment") do |form|%>
+							<input type="hidden" name=comment[parent_id] value="<%= comment.id %>">
+								<%= form.text_area :content, placeholder: "在此輸入留言" %>
+								<%= form.submit "送出", data: { action: "click->ajaxForm#send" }, class: "owner-course-btn" %>
+							<% end %>
+						</td>
 					</tr>
 				<% end %>
 			</tbody>

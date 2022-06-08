@@ -96,7 +96,7 @@
           </div>
         </div>
         <div><span data-section-list-target="loadingCircle"></span></div>
-        <%= video_tag url_for(@section.media), id: "myVideo", controls: true, controlsList: "nodownload", autoplay: "autoplay", data: { action: "ended->section-list#videoFinished", section_list_target: "videoFinished", course_id: @course.friendly_id, section_slug_id: @section.friendly_id, section_id: @section.id } if @section.media.attached? %>
+        <%= video_tag url_for(@section.media), id: "myVideo", controls: true, controlsList: "nodownload", data: { action: "ended->section-list#videoFinished", section_list_target: "videoFinished", course_id: @course.friendly_id, section_slug_id: @section.friendly_id, section_id: @section.id } if @section.media.attached? %>
       </div>
       <p class="mt-4"><%= markdown(@section.content)%></p>
       <div class="m-8 mx-auto bg-white border-2 border-dashed rounded-md">
