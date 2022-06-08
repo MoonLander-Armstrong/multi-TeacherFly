@@ -6,7 +6,7 @@ class Tenant::Owner::SchoolsController < Tenant::BaseController
   def update
     if @teacher.update(school_params)
       session.clear
-      redirect_to teacher_auto_sign_in_url(subdomain: current_teacher.subdomain)
+      redirect_to teacher_update_sign_in_url(subdomain: current_teacher.subdomain)
     else
       render :edit
     end

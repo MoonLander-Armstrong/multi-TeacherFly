@@ -5,7 +5,6 @@
         <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">我的學校</h1>
         <%= render "shared/flash" %>
         <div>
-          <%= form.hidden_field :reset_password_token %>
           <%= form.button class: "owner-course-btn" do %>
             <i class="mr-4 fa-solid fa-arrow-rotate-right"></i>更新資訊
           <% end %>
@@ -38,10 +37,6 @@
                 <%= form.label :email, "老師信箱", class: "flex-shrink-0 mr-4" %>
                 <%= form.email_field :email %>
               </div>
-              <div class="flex items-center mb-4">
-                <%= form.label :password, "修改密碼", class: "flex-shrink-0 mr-4" %>
-                <%= form.password_field :password %>
-              </div>
             </div>
           </div>
         </div>
@@ -64,11 +59,11 @@
               <%= form.file_field :logo, class: "hidden", data: { action: "change->image-label#loadImg", image_label_target: "fileInput" } %>
             </div>
             <div>
-              <div class="flex items-center mt-10 mb-8">
+              <div class="flex items-center mt-6 mb-4">
                 <%= form.label :school_name, "學校名稱", class: "flex-shrink-0 mr-4" %>
                 <%= form.text_field :school_name %>
               </div>
-              <div class="flex items-center mb-8">
+              <div class="flex items-center mb-4">
                 <%= form.label :subdomain, class: "flex-shrink-0 mr-4" %>
                 <%= form.text_field :subdomain %>
               </div>
