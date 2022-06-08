@@ -6,4 +6,5 @@ class Tenant::BaseController < ApplicationController
   def found_tanent_app
     not_found unless MultiTenantSupport.current_tenant
   end
+
 end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationJob < ActiveJob::Base
-  require 'multi_tenant_support/active_job'
   # Automatically retry jobs that encountered a deadlock
   # retry_on ActiveRecord::Deadlocked
 
