@@ -3,8 +3,26 @@
     <div class="teacher-member-form">
       <h2 class="teacher-member-form-title">修改密碼</h2>
 
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_for current_student, url: students_information_path, method: "patch" do |f| %>
+        <%= render "shared/flash" %>
+
+        <div class="w-40 h-40 mx-auto mb-8 overflow-hidden rounded-full field" data-controller="image-label">
+          <%= f.label :avatar, class: "avatar-label relative block w-40 h-40 rounded-full overflow-hidden cursor-pointer" do %>
+            <div class="absolute inset-0 w-40 h-40 mx-auto text-white">
+              <% if current_student.avatar.attached? %>
+                <%= image_tag url_for(current_student.avatar), class: "w-40 h-40 object-cover", data: { image_label_target: "preview" } %>
+              <% else %>
+                <div class="flex items-center justify-center w-40 h-40 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+                  <i class="text-6xl fa-solid fa-user"></i>
+                </div>
+                <img class="hidden object-cover w-20 h-20" data-image-label-target="preview">
+              <% end %>
+            </div>
+          <% end %>
+          <%= f.file_field :avatar, class: "hidden", data: { action: "change->image-label#loadImg", image_label_target: "fileInput" } %>
+        </div>
+
+        
 
         <div class="field">
           <%= f.label :username, "使用者名稱" %>
@@ -40,8 +58,10 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "再次輸入新密碼" %>
         </div>
         
-        <%= f.submit t('.update') %>
+        <%= f.submit "更新密碼" %>
       <% end %>
     </div>
   </div>  
 </div>
+
+

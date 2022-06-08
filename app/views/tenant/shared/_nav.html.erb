@@ -19,7 +19,7 @@
     <ul class="absolute inset-x-0 login-area teacher fade top-full sm:hidden tranition-all duration-200 origin-top" data-navbar-target="navList">
       <li><%= link_to '所有課程', courses_path %></li>
       <li><%= link_to '我的課程', orders_path %></li>
-      <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
+      <li><%= link_to '修改個人資料', students_information_path %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
   <% else %>
@@ -36,9 +36,6 @@
 <%# navbar of mobile horizontal & up %>
   <% if student_signed_in? %>
       <ul class="hidden sm:flex login-area teacher mr-3">
-        <% if teacher_signed_in? %>
-          <li><%= link_to '進入後台', owner_courses_path %></li>
-        <% end %>
         <li><%= link_to '所有課程', courses_path %></li>
         <li><%= link_to '我的課程', orders_path %></li>
       </ul>
@@ -50,7 +47,7 @@
       <% end %>
     </button>
     <ul class="absolute hidden w-40 mt-4 overflow-hidden rounded login-area teacher top-full right-4" data-navbar-target="dropdownList">
-      <li><%= link_to '修改個人資料', new_registration_path(:student) %></li>
+      <li><%= link_to '修改個人資料', students_information_path %></li>
       <li><%= link_to '登出', students_log_out_path, method: "delete" %></li>
     </ul>
   <% else %>
