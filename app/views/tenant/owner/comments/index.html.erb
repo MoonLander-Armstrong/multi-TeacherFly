@@ -32,13 +32,8 @@
 								<%= comment.content %>
 							</span>
 						</td>
-						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
-							<% if comment.student.nil? %>
-								<%= comment.teacher.username %>
-							<% else %>
-								<%= comment.student.username %>		
-								<span class="px-1 py-1 text-sm text-white rounded-full bg-secondary-300">學生</span>
-							<% end %>
+						<td class="text-center owner-text whitespace-nowrap text-primary-500">
+							<%= comment.student.nil? ? comment.teacher.username : comment.student.username %>	
 						</td>
 						<td class="text-center owner-text text-primary-500 whitespace-nowrap">
 							<%= comment.course.title %>
