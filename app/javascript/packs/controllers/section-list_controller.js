@@ -28,26 +28,18 @@ export default class extends Controller {
     );
 
     // loading block
-    setTimeout(() => {
-      const modal = this.loadingTarget.children[0];
-      const circle = this.loadingTarget.children[1];
-      this.loadingTarget.removeChild(modal);
-      this.loadingTarget.removeChild(circle);
-    }, 2000);
+    // setTimeout(() => {
+    //   const modal = this.loadingTarget.remove();
+    // }, 2000);
+
+    // show sidebar in viewport size over md
+    if (window.innerWidth > 768) {
+      this.sectionDropdownTarget.classList.remove("fade");
+    }
   }
 
   toggleSideBar() {
     this.sectionDropdownTarget.classList.toggle("fade");
-    this.sectionDropdownTarget.classList.toggle("show");
-  }
-
-  viewportResize() {
-    if (window.screen.width > 767) {
-      this.sectionDropdownTarget.classList.remove("fade");
-      this.sectionDropdownTarget.classList.remove("show");
-    } else {
-      this.sectionDropdownTarget.classList.add("fade");
-    }
   }
 
   setWidth({ detail }) {
@@ -56,6 +48,10 @@ export default class extends Controller {
       detail.progressBarWidth
     );
     this.progressTarget.textContent = detail.progressBarWidth;
+  }
+
+  endLoading() {
+    this.loadingTarget.remove();
   }
 
   videoFinished() {
@@ -68,11 +64,13 @@ export default class extends Controller {
     data.append("finished", true);
     data.append("sectionId", `${video.dataset.sectionId}`);
 
-    var finishedIconTarget = finishedIconTargets.find(
-      (e) => e.dataset.sectionId == video.dataset.sectionId
+    const finishedIconTarget = finishedIconTargets.find(
+      (finishedIcon) =>
+        finishedIcon.dataset.sectionId == video.dataset.sectionId
     );
-    var unfinishedIconTarget = unfinishedIconTargets.find(
-      (e) => e.dataset.sectionId == video.dataset.sectionId
+    const unfinishedIconTarget = unfinishedIconTargets.find(
+      (unfinishedIcon) =>
+        unfinishedIcon.dataset.sectionId == video.dataset.sectionId
     );
 
     Rails.ajax({

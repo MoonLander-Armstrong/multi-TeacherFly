@@ -22,4 +22,4 @@ end
 # require 'multi_tenant_support/sidekiq'
 
 # Uncomment if you are using ActiveJob
-# require 'multi_tenant_support/active_job'
+require 'multi_tenant_support/active_job'

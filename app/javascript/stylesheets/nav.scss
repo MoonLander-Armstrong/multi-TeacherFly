@@ -23,8 +23,8 @@
       @apply bg-secondary-300 hover:bg-secondary-400 sm:bg-secondary-400 sm:hover:bg-secondary-300 text-secondary-500 hover:text-white sm:text-white sm:hover:text-secondary-500;
     }
   }
+}
 
-  .fade {
-    transform: scaleY(0);
-  }
+.fade {
+  transform: scaleY(0);
 }

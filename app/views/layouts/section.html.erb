@@ -21,10 +21,10 @@
   </head>
 
   <body data-controller="section-list">
-    <header class="fixed z-20 flex items-center w-full shadow-md section_header h-14 bg-primary-300">
+    <header class="fixed z-20 flex items-center w-full shadow-md section_header h-14 bg-secondary-400">
       <%= yield :header %>
     </header>
-    <main class="relative max-h-screen overflow-hidden pt-14 section_main md:flex">
+    <main class="relative max-h-screen pt-14 section_main md:flex">
       <%= yield :sidebar %>
       <%= yield %>
     </main>
