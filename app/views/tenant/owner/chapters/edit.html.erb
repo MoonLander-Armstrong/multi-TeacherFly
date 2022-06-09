@@ -13,18 +13,18 @@
   </ul>
 <% end %>
 
-<div class="owner-main-container relative pt-10 min-h-screen">
+<div class="relative min-h-screen pt-10 owner-main-container">
   <div class="w-11/12 mx-auto">
   <%= form_with model: @chapter, url: owner_course_chapter_path(@course, @chapter) do |form| %>
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
       <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">編輯章節</h1>
       <div>
         <%= form.button class: "owner-course-btn" do %>
-          <i class="fa-solid fa-arrow-rotate-right mr-4"></i>更新章節
+          <i class="mr-4 fa-solid fa-arrow-rotate-right"></i>更新章節
         <% end %>
       </div>  
     </div>
-    <div class="p-8 border-2 bg-white border-gray-300 border-dashed rounded">
+    <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded">
       <div class="flex items-center mb-4">
         <%= form.label :title, "標題", class: "flex-shrink-0 mr-4" %>
         <%= form.text_field :title, maxlength: 20 %>

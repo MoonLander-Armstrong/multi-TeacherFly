@@ -17,9 +17,11 @@
   <div class="w-11/12 mx-auto">
   <%= form_with model: @section, url: owner_course_section_path(@section.chapter.course_id, @section), class: "form" do |form| %>
     <div class="flex items-center justify-between">
-      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">更新小節</h1>
+      <h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">編輯小節</h1>
       <div>
-        <%= form.submit "+ 編輯小節", class: "owner-course-btn" %>
+        <%= form.button class: "owner-course-btn" do %>
+          <i class="mr-4 fa-solid fa-arrow-rotate-right"></i>更新小節
+        <% end %>
       </div>
     </div>
     <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded"  data-controller=" uploads">

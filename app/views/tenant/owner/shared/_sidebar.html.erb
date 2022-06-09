@@ -13,7 +13,7 @@
     </div>
   <% end %>
   <%= link_to owner_courses_path, class: "mx-auto hover:bg-primary-100" do %>
-    <h1 class="text-center whitespace-nowrap"><%= current_teacher.username %>'s school</h1>
+    <h1 class="text-center whitespace-nowrap"><%= current_teacher.school_name %> school</h1>
   <% end %>
   <input type="checkbox" id="hamburger" class="hidden hamburger" />
   <ul class="absolute w-64 h-screen overflow-y-scroll transition-all duration-500 top-full -left-full md:top-56 md:left-0 bg-primary-300 sidebar-list md:overflow-y-hidden">
