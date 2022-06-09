@@ -73,7 +73,7 @@
                 <div class="p-8 border border-gray-300 rounded bg-secondary-200">
                   <div class="flex items-center justify-center">
                     <div class="w-2/3">
-                      <%= form.select :course_id, (Course.published - @student.orders.map { |order| order.course }).pluck(:title, :id), { include_blank: "選擇您要贈送的課程" }%>
+                      <%= form.select :course_id, (Course.published - @orders.map { |order| order.course }).pluck(:title, :id), { include_blank: "選擇您要贈送的課程" }%>
                     </div>
                       <%= form.button "贈送", class: "owner-course-btn flex items-center ml-5" %>
                   </div>
