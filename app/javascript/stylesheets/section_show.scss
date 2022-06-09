@@ -3,7 +3,7 @@
     @apply flex items-center h-14 px-4 transition;
 
     &:hover {
-      @apply text-gray-300 transition;
+      @apply text-white transition;
     }
   }
 }
@@ -23,10 +23,6 @@
       @apply absolute top-0 left-0 bottom-0
         bg-primary-300 rounded-full;
     }
-  }
-
-  video {
-    aspect-ratio: 16/9;
   }
 
   .loadingArea {
@@ -88,7 +84,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: pink; */
     animation: rotating 2s linear infinite;
     animation-delay: -1s;
   }
@@ -111,42 +106,17 @@
   }
 }
 
-.comment-triangle {
-  box-shadow: 0 0 5px 0 #ddd;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: -12px;
-    left: 20px;
-    border-style: solid;
-    border-width: 0 6px 12px 6px;
-    border-color: transparent transparent #fef9ee transparent;
-  }
-}
-
 .comment {
   @apply my-4;
 
   & .comment {
-    @apply pl-10;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .comment-triangle::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: -12px;
-    border-style: solid;
-    border-width: 6px 12px 6px 0px;
-    border-color: transparent #fef9ee transparent transparent;
+    @apply pl-4 md:pl-10;
   }
 }
 
 .comments {
-  @apply relative flex-grow p-4  rounded comment-triangle md:ml-4;
+  box-shadow: 0 0 5px 0 #ddd;
+  @apply relative flex-grow p-4 rounded ml-4;
 }
 
 .comment-student {

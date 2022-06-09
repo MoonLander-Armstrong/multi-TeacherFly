@@ -1,37 +1,29 @@
 <%= content_for :header do %>
-  <nav class="flex justify-between flex-grow mx-auto text-white" data-controller="section-hamburger">
+  <nav class="flex justify-between flex-grow mx-auto text-white" data-controller="navbar">
     <%= link_to 'javascript:history.back()', class: "flex items-center md:ml-20 ml-8 py-4 left-arrow text-xl" do %>
       <i class="mr-4 fa-solid fa-angle-left"></i>
       <span>上一頁</span>
     <% end %>
-    <button class="relative hidden mr-20 md:block" data-action="click->section-hamburger#hiddenAvatar">
+    <button class="relative mr-20 md:block" data-action="click->navbar#toggleDropdownList">
       <div class="w-10 h-10 overflow-hidden rounded-full">
-        <%= image_tag url_for(current_student.avatar) if current_student.avatar.attached? %>
+        <% if current_student.avatar.attached? %>
+          <%= image_tag url_for(current_student.avatar), class: "w-full h-full object-cover" %>
+        <% else %>
+          <div class="flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+            <i class="text-lg fa-solid fa-user"></i>
+          </div> 
+        <% end %>
       </div>
-      <ul class="absolute hidden overflow-hidden rounded-md shadow-md bg-primary-300 top-full -right-12"  data-section-hamburger-target="avatarButton">
-        <li><%= link_to "我的課程", orders_path %></li>
-        <li><%= link_to "編輯會員資料", "#" %></li>
-        <li><%= link_to "登出", destroy_student_session_path, method: :delete %></li>
-      </ul>
     </button>
-    <button class="relative p-1 mr-8 md:hidden" data-action="click->section-hamburger#hiddenHamburger">
-      <div class="w-7 h-0.5 my-1 bg-white"></div>
-      <div class="w-7 h-0.5 my-2 bg-white"></div>
-      <div class="w-7 h-0.5 my-1 bg-white"></div>
-      <ul class="absolute right-0 hidden overflow-hidden rounded-md bg-primary-300 mobile-list top-full" data-section-hamburger-target="hamburgerButton">
-        <li class="w-10 h-10 p-0 mx-auto mt-4 overflow-hidden rounded-full">
-          <%= image_tag url_for(current_student.avatar) if current_student.avatar.attached? %>
-        </li>
-        <li><%= link_to "我的課程", orders_path %></li>
-        <li><%= link_to "編輯會員資料", "#" %></li>
-        <li><%= link_to "登出", destroy_student_session_path, method: :delete %></li>
-      </ul>
-    </button>
+    <ul class="absolute top-full -right-12 mt-4 hidden overflow-hidden rounded-md shadow-md bg-secondary-400" data-navbar-target="dropdownList">
+      <li><%= link_to "我的課程", orders_path %></li>
+      <li><%= link_to "登出", students_log_out_path, method: :delete %></li>
+    </ul>
   </nav>
 <% end %>
 
 <%= content_for :sidebar do %>
-  <nav class="absolute left-0 right-0 z-10 flex-shrink-0 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen" data-section-list-target="sectionDropdown" data-action="resize@window->section-list#viewportResize">
+  <nav class="hidden md:block absolute left-0 right-0 z-10 flex-shrink-0 overflow-scroll bg-white section-dropdown md:relative md:w-64 lg:w-72 md:max-h-screen">
     <div class="w-full h-72">
       <%= image_tag url_for(@course.image), class: "w-full h-full object-cover" if @course.image.attached? %>
     </div>
