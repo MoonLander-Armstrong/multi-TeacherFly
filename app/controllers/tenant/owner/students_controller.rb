@@ -4,7 +4,7 @@ class Tenant::Owner::StudentsController < Tenant::BaseController
 
   def index
     authorize :student
-    @students = Student.ordered.all
+    @students = Student.all.order(id: :desc)
   end
 
   def information

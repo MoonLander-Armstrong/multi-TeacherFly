@@ -6,7 +6,7 @@
           <% if comment.teacher.avatar.attached? %>
             <%= image_tag url_for(comment.teacher.avatar), class: "w-full h-full object-cover" %>
           <% else %>
-            <div class="flex items-center justify-center w-12 h-12 md:w-20 md:h-20 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+            <div class="flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-300 rounded-full md:w-20 md:h-20" data-image-label-target="fakeImg">
               <i class="text-2xl fa-solid fa-user"></i>
             </div>
           <% end %>
@@ -14,12 +14,15 @@
           <% if comment.student.avatar.attached? %>
             <%= iamge_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" %>
           <% else %>
-            <div class="flex items-center justify-center w-12 h-12 md:w-20 md:h-20 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+            <div class="flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-300 rounded-full md:w-20 md:h-20" data-image-label-target="fakeImg">
               <i class="text-2xl fa-solid fa-user"></i>
             </div>
           <% end %>
         <% end %>
       </div>
+      <% if comment.student.nil? %>
+      <span class="block mx-auto text-center w-14 tag tag-publish">講師</span>
+      <% end %>
     </div>
     <div class="comments <%= comment.student.nil? ? "comment-owner" : "comment-student" %>">
       <div class="flex items-center justify-between mb-4 text-primary-300">
