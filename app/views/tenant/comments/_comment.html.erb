@@ -2,16 +2,18 @@
   <div class="md:flex">
     <div>
       <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
-        <% if comment.student.nil? %>
-          <%= image_tag url_for(comment.teacher.avatar), class: "w-full h-full object-cover" if comment.teacher.avatar.attached? %>
+        <% if comment.teacher.avatar.attached? || comment.student.avatar.attached? %>
+          <%= image_tag (comment.student.nil? ? url_for(comment.teacher.avatar) : url_for(comment.student.avatar)), class: "w-full h-full object-cover" %>
         <% else %>
-          <%= image_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" if comment.student.avatar.attached? %>
+          <div class="flex items-center justify-center w-12 h-12 md:w-20 md:h-20 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+            <i class="text-2xl fa-solid fa-user"></i>
+          </div> 
         <% end %>
       </div>
       <% if comment.student.nil? && @course.teacher == comment.teacher %>
-      <span class="mx-4 border tag bg-rice text-primary-500 border-secondary-400">
-        講師
-      </span>
+        <span class="mx-4 border tag bg-rice text-primary-500 border-secondary-400">
+          講師
+        </span>
       <% end %> 
     </div>
     <div class="comments <%= comment.student.nil? ? "comment-owner" : "comment-student" %>">

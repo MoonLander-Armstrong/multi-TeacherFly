@@ -15,12 +15,12 @@
     <div class="flex items-center mr-2 md:hidden">
       <% unless @course.all_published_sections.first == @section %>
         <%= link_to course_section_path(@course, @section.prev_section), class: "px-6 py-0.5 mr-2 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
-          <i class="mr-2 fa-solid fa-chevron-left"></i>
+          <i class="fa-solid fa-chevron-left"></i>
         <% end %>
       <% end %>
       <% unless @course.all_published_sections.last == @section %>
         <%= link_to course_section_path(@course, @section.next_section), class: "px-6 py-0.5 border border-white rounded hover:border-gray-300 hover:text-gray-300 transition" do %>
-          <i class="ml-2 fa-solid fa-chevron-right"></i>
+          <i class="fa-solid fa-chevron-right"></i>
         <% end %>
       <% end %>
     </div>
@@ -43,17 +43,17 @@
 <% end %>
 
 <%= content_for :sidebar do %>
-  <nav class="absolute left-0 right-0 z-10 flex-shrink-0 pt-4 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen" data-section-list-target="sectionDropdown" data-action="resize@window->section-list#viewportResize">
+  <nav class="absolute inset-0 pt-20 md:pt-4 z-10 flex-shrink-0 overflow-scroll bg-white section-dropdown fade md:relative md:w-64 lg:w-72 md:max-h-screen tranition-all duration-200 origin-top" data-section-list-target="sectionDropdown">
     <div class="border-b">
       <h1 class="text-xl font-bold text-center"><%= @course.title %></h1>
-      <% if current_student.bought?(@course) || current_student.owner?(@course)%>
+      <% if student_signed_in? && current_student.bought?(@course) %>
         <div class="px-4 mt-4 text-center">
           <div class="relative h-3 border border-gray-300 rounded-full progress-bar" data-section-list-target="progressBar" data-progressBar=<%= @rate %> data-action="sendWidth@document->section-list#setWidth"></div>
           <span class="inline-block my-3">已完成<span class="ml-4" data-section-list-target="progress"><%= @rate %>%</span></span>
         </div>
       <% else %>
         <div class="px-4 my-4 text-center">
-          <div class="relative h-3 border rounded-full progress-bar"></div>
+          <div class="relative h-3 border rounded-full progress-bar" data-section-list-target="progressBar"></div>
           <span class="inline-block my-3">已完成<span class="ml-4">0%</span></span>
         </div>
       <% end %>
@@ -63,12 +63,12 @@
   </nav>
 <% end %>
 
-<% if current_student.bought?(@course) || current_student.owner?(@course) %>
+<% if student_signed_in? && current_student.bought?(@course) %>
   <section class="relative flex flex-grow px-5 pt-8 overflow-scroll bg-gray-100 border-l">
     <div class="container mx-auto">
       <h1 class="mb-8 text-3xl text-primary-300"><%= @section.title %></h1>
-      <div class="section-media" data-section-list-target="loading">
-        <div class="loadingArea">
+      <div class="section-media w-full">
+        <div class="loadingArea" data-section-list-target="loading">
           <div class="loader">
             <span style="--i:1;"></span>
             <span style="--i:2;"></span>
@@ -95,10 +95,9 @@
             </div>
           </div>
         </div>
-        <div><span data-section-list-target="loadingCircle"></span></div>
-        <%= video_tag url_for(@section.media), id: "myVideo", controls: true, controlsList: "nodownload", autoplay: "autoplay", data: { action: "ended->section-list#videoFinished", section_list_target: "videoFinished", course_id: @course.friendly_id, section_slug_id: @section.friendly_id, section_id: @section.id } if @section.media.attached? %>
+        <%= video_tag url_for(@section.media), class: "w-full", controls: true, controlsList: "nodownload", preload: "metadata", data: { action: "ended->section-list#videoFinished loadeddata->section-list#endLoading", section_list_target: "videoFinished", course_id: @course.friendly_id, section_slug_id: @section.friendly_id, section_id: @section.id } if @section.media.attached? %>
       </div>
-      <p class="mt-4"><%= markdown(@section.content)%></p>
+      <p class="mt-4"><%= markdown(@section.content) %></p>
       <div class="m-8 mx-auto bg-white border-2 border-dashed rounded-md">
         <h2 class="inline-block px-8 py-3 text-xl text-white rounded-md bg-primary-300">留言專區</h2>
         <div class="p-8">
