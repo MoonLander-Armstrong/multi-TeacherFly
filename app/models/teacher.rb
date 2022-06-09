@@ -23,7 +23,7 @@ class Teacher < ApplicationRecord
   validates :subdomain, presence: true,
                         uniqueness: true,
                         length: { minimum: 3, maximum: 10 },
-                        format: { with: /\A[a-z, 0-9]{3,10}\z/ }
+                        format: { with: /\A[a-z,0-9]\S{3,10}\z/ }
 
   # relationship
   has_many :students

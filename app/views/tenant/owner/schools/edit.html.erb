@@ -63,9 +63,10 @@
                 <%= form.label :school_name, "學校名稱", class: "flex-shrink-0 mr-4" %>
                 <%= form.text_field :school_name %>
               </div>
-              <div class="flex items-center mb-4">
+              <div class="relative flex items-center mb-4">
                 <%= form.label :subdomain, class: "flex-shrink-0 mr-4" %>
-                <%= form.text_field :subdomain %>
+                <%= form.text_field :subdomain, placeholder: "請輸入3~10個英文或數字" %>
+                <div class="absolute right-0 text-sm top-8 text-warning-200">請輸入3~10個英文或數字(不可包含空格)</div> 
               </div>
             </div>
           </div>
