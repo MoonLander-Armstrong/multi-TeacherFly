@@ -14,7 +14,7 @@
 
     li {
       &:hover {
-        @apply bg-primary-200;
+        @apply bg-secondary-300 text-secondary-500;
       }
 
       a {

@@ -27,11 +27,6 @@ export default class extends Controller {
       `${this.progressBarTarget.dataset.progressbar}%`
     );
 
-    // loading block
-    // setTimeout(() => {
-    //   const modal = this.loadingTarget.remove();
-    // }, 2000);
-
     // show sidebar in viewport size over md
     if (window.innerWidth > 768) {
       this.sectionDropdownTarget.classList.remove("fade");

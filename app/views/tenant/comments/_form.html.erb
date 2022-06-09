@@ -3,11 +3,17 @@
     <input type="hidden" name=comment[parent_id] value="<%= parent.id %>">
   <% end %>
 
-  <div class="mb-6 md:flex">
+  <div class="mb-6 flex">
     <div class="flex-shrink-0 w-12 h-12 mb-4 overflow-hidden rounded-full md:w-20 md:h-20">
-      <%= image_tag url_for(current_student.avatar), class: "w-full h-full object-cover" if current_student.avatar.attached? %>
+      <% if current_student.avatar.attached? %>
+        <%= image_tag url_for(current_student.avatar), class: "w-full h-full object-cover" %>
+      <% else %>
+        <div class="flex items-center justify-center w-12 h-12 md:w-20 md:h-20 overflow-hidden bg-gray-300 rounded-full" data-image-label-target="fakeImg">
+          <i class="text-2xl fa-solid fa-user"></i>
+        </div> 
+      <% end %>
     </div>
-    <div class="relative flex-grow p-4 comment-triangle md:ml-4 bg-secondary-100">
+    <div class="relative flex-grow p-4 comment-triangle ml-4 bg-secondary-100">
       <h3 class="mb-4 text-primary-300"><%= current_student.username %></h3>
       <%= form.text_area :content , class: "w-full h-32 p-2 mb-2 md:mb-4", data: { ajaxForm_target: "input"}, placeholder: "在此輸入留言" %>
       <div class="flex">
