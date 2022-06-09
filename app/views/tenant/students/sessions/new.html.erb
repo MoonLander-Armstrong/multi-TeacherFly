@@ -1,4 +1,4 @@
-<div class="teacher-member relative h-screen">
+<div class="relative h-screen pt-20 teacher-member">
   <div class="container p-4 mx-auto">
     <div class="teacher-member-form">
       <h2 class="teacher-member-form-title">
@@ -6,7 +6,7 @@
       </h2>
       <div class="w-full mt-6">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= render "shared/flash" %>
+          <%= render "devise/shared/error_messages", resource: resource %>
   
           <div class="field">
             <%= f.label :email %>

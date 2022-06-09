@@ -34,7 +34,6 @@ module Newebpay
 
       # 選填欄位
       info[:ReturnURL] = "https://#{MultiTenantSupport.current_tenant.subdomain}.#{ENV['HOST_NAME']}/orders/payment_response"
-      # info[:ReturnURL] = "http://#{MultiTenantSupport.current_tenant.subdomain}.lvh.me:3000/orders/payment_response"
       info[:NotifyURL] = ""
       info[:Email] = order.student.email
       info[:CREDIT] = 1
