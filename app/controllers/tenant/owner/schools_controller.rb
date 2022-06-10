@@ -16,7 +16,7 @@ class Tenant::Owner::SchoolsController < Tenant::BaseController
 
   private
   def school_params
-    params.require(:teacher).permit(:school_name, :avatar, :logo, :subdomain, :email, :username, :password,  :password_confirmation, :reset_password_token)
+    params.require(:teacher).permit(:school_name, :avatar, :logo, :subdomain, :email, :username, :password, :password_confirmation, :reset_password_token)
   end
 
   def find_teacher
