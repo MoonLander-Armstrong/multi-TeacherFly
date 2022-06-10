@@ -1,4 +1,4 @@
-<div class="fixed z-20 inset-x-0 flex px-4 py-3 text-3xl md:inset-y-0 md:w-64 md:block bg-primary-300 md:overflow-scroll">
+<div class="fixed inset-x-0 z-20 flex px-4 py-3 text-3xl md:inset-y-0 md:w-64 md:block bg-primary-300 md:overflow-scroll">
   <label for="hamburger" class="md:hidden"><i class="fa-solid fa-bars"></i></label>
   <%= link_to edit_owner_schools_path do  %>
     <div class="hidden w-24 h-24 mx-auto my-8 overflow-hidden rounded-full md:block">
@@ -12,11 +12,12 @@
       <% end %>
     </div>
   <% end %>
-  <%= link_to owner_courses_path, class: "mx-auto hover:bg-primary-100" do %>
-    <h1 class="text-center whitespace-nowrap"><%= current_teacher.school_name %> school</h1>
+  <%= link_to owner_courses_path, class: "mx-auto hover:bg-primary-100 " do %>
+    <h1 class="text-center truncate"><%= current_teacher.school_name %></h1>
+    <h1 class="text-center">school</h1>
   <% end %>
   <input type="checkbox" id="hamburger" class="hidden" />
-  <ul class="absolute w-64 h-screen overflow-y-scroll transition-all duration-500 top-full -left-full md:top-56 md:left-0 bg-primary-300 sidebar-list md:overflow-y-hidden">
+  <ul class="absolute w-64 h-screen overflow-y-scroll transition-all duration-500 top-full -left-full md:top-60 md:left-0 bg-primary-300 sidebar-list md:overflow-y-hidden">
     <li class="mx-4 mt-10">
       <%= link_to owner_courses_path, data: { sidebar_style_target: "courses" } do %>
         <i class="fa-solid fa-book-open"></i>全部課程
