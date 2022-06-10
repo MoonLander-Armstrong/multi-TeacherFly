@@ -43,7 +43,7 @@
     </li>
     <li class="mx-4">
       <%= link_to owner_orders_path, data: { sidebar_style_target: "orders" } do %>
-        <i class="pr-1 fa-solid fa-cart-shopping"></i>訂單管理
+        <i class="mr-1 fa-solid fa-cart-shopping"></i>訂單管理
       <% end %>
     </li>
     <li class="mx-4">
@@ -54,6 +54,11 @@
     <li class="bottom-0 mx-4 mt-6 border-t border-black">
       <%= link_to owner_preview_path, target: "_blank" do %>
         <i class="fa-solid fa-house"></i>預覽首頁
+      <% end %>
+    </li>
+    <li class="mx-4">
+      <%= link_to teacher_auto_sign_out_path, method: :delete do %>
+        <i class="pr-1 fa-solid fa-right-from-bracket"></i>登出
       <% end %>
     </li>
   </ul>
