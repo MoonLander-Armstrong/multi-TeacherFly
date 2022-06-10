@@ -18,12 +18,13 @@ class Teacher < ApplicationRecord
   end
 
   # validates
+  before_validation { self.subdomain = self.subdomain.downcase }
   validates :username, length: { maximum: 20 }
   validates :school_name, length: { maximum: 8 }
   validates :subdomain, presence: true,
                         uniqueness: true,
                         length: { minimum: 3, maximum: 10 },
-                        format: { with: /\A\w[a-z0-9]{2,10}\z/ }
+                        format: { with: /\A[a-z0-9]{3,10}\z/ }
 
   # relationship
   has_many :students
