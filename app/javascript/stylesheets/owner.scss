@@ -1,18 +1,17 @@
 .owner-main {
-  flex-grow: 1;
-  overflow-y: scroll;
-  position: relative;
+  @apply relative flex-grow bg-gray-100 pt-14 md:pt-0 overflow-y-scroll;
+}
+
+.owner-title {
+  @apply flex flex-wrap items-center w-full mt-4;
 }
 
 .owner-main-container {
+  @apply relative pt-10 min-h-screen;
+
   &::before {
     content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 1rem;
-    @apply bg-secondary-400;
+    @apply absolute top-0 inset-x-0 h-4 bg-secondary-400;
   }
 
   form {
@@ -22,10 +21,16 @@
 
     textarea {
       @apply w-full h-40 p-2 text-primary-300 border-primary-300;
+      &:focus {
+        @apply outline-none ring-1 ring-primary-300;
+      }
     }
 
     select {
       @apply w-full px-3 py-1 bg-gray-50 rounded-md border border-primary-300 text-primary-300 focus:border-primary-300 appearance-none;
+      &focus {
+        @apply ring-1 ring-primary-300;
+      }
     }
 
     .owner-course-btn {
@@ -38,16 +43,12 @@
   @apply px-4 py-2 my-auto bg-primary-300 text-white rounded hover:bg-primary-400;
 }
 
-.owner-list {
-  @apply w-full h-full px-4 py-10 m-auto bg-gradient-to-tl;
-}
-
-.owner-title {
-  @apply flex justify-between w-full mb-11;
+.owner-table-container {
+  @apply w-full overflow-x-scroll;
 }
 
 .owner-table {
-  @apply w-full table-auto min-w-max;
+  @apply w-full table-auto min-w-max my-6 rounded-md  shadow-md;
 }
 
 .owner-thead {

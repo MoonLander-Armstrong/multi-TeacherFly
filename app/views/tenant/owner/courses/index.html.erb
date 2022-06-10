@@ -1,6 +1,6 @@
-<div class="owner-main-container relative pt-10 min-h-screen">
+<div class="owner-main-container">
   <div class="w-11/12 mx-auto">
-		<div class="flex items-center w-full h-16 mt-4">
+		<div class="owner-title">
 			<h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">全部課程</h1>
 			<div class="w-1/3 mx-4 mr-auto">
 				<%= render "shared/flash" %>
@@ -9,19 +9,21 @@
 				+ 新增課程
 			<% end %>
 		</div>
-		<table class="mt-6 overflow-hidden rounded-md owner-table shadow-md">
-			<thead class="owner-thead">
-				<tr>
-					<th class="text-left owner-text">課程名稱</th>
-					<th class="text-center owner-text">講師</th>
-					<th class="text-center owner-text">售價</th>
-					<th class="text-center owner-text">授課數</th>
-					<th class="text-center owner-text">狀態</th>
-				</tr>
-			</thead>
-			<tbody class="owner-tbody">
-				<%= render @courses if @courses %>
-			</tbody>
-		</table>
+		<div class="owner-table-container">
+			<table class="owner-table">
+				<thead class="owner-thead">
+					<tr>
+						<th class="text-left owner-text">課程名稱</th>
+						<th class="text-center owner-text">講師</th>
+						<th class="text-center owner-text">售價</th>
+						<th class="text-center owner-text">授課數</th>
+						<th class="text-center owner-text">狀態</th>
+					</tr>
+				</thead>
+				<tbody class="owner-tbody">
+					<%= render @courses if @courses %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

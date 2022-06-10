@@ -1,6 +1,6 @@
-<div class="relative min-h-screen pt-10 owner-main-container">
+<div class="owner-main-container">
   <div class="w-11/12 mx-auto">
-		<div class="flex items-center w-full h-16 mt-4">
+		<div class="owner-title">
 			<h1 class="inline-block my-4 text-4xl font-extrabold text-primary-300">講師名單</h1>
       <div class="w-1/3 mx-4 mr-auto">
         <%= render "shared/flash" %>
@@ -9,44 +9,46 @@
         <button class="owner-course-btn"> + 新增講師</button>
       <% end %>
 		</div>
-		<table class="mt-6 overflow-hidden rounded-md shadow-md owner-table">
-			<thead class="owner-thead">
-				<tr class="">
-					<th class="text-left owner-text">講師姓名</th>
-          <th class="w-60">刪除</th>
-				</tr>
-			</thead>
-			<tbody class="owner-tbody">
-				<% @lecturers.each do |lecturer| %>
-					<tr>
-						<td class="text-left owner-text text-primary-500">
-							<div class="flex items-center">
-                <%= link_to edit_owner_lecturer_path(lecturer), class: "flex items-center hover:underline" do %>
-                  <% if lecturer.mugshot %>
-                    <div class="w-8 h-8 mr-4 overflow-hidden rounded-full">
-                      <%= image_tag url_for(lecturer.mugshot) if lecturer.mugshot.attached? %>
-                    </div>
-                  <% else %>
-                    <div class="flex items-center justify-center w-8 h-8 mr-4 overflow-hidden bg-gray-300 rounded-full">
-                      <i class="fa-solid fa-user"></i>
-                    </div>
+		<div class="owner-table-container">
+      <table class="mt-6 overflow-hidden rounded-md shadow-md owner-table">
+        <thead class="owner-thead">
+          <tr class="">
+            <th class="text-left owner-text">講師姓名</th>
+                <th class="w-60">刪除</th>
+          </tr>
+        </thead>
+        <tbody class="owner-tbody">
+          <% @lecturers.each do |lecturer| %>
+            <tr>
+              <td class="text-left owner-text text-primary-500">
+                <div class="flex items-center">
+                  <%= link_to edit_owner_lecturer_path(lecturer), class: "flex items-center hover:underline" do %>
+                    <% if lecturer.mugshot.attached? %>
+                      <div class="w-8 h-8 mr-4 overflow-hidden rounded-full">
+                        <%= image_tag url_for(lecturer.mugshot) %>
+                      </div>
+                    <% else %>
+                      <div class="flex items-center justify-center w-8 h-8 mr-4 overflow-hidden bg-gray-300 rounded-full">
+                        <i class="fa-solid fa-user"></i>
+                      </div>
+                    <% end %>
+                    <span><%= lecturer.name %><%= "/ #{lecturer.nickname}" if lecturer.nickname.present? %></span>
                   <% end %>
-                  <span><%= lecturer.name %><%= "/ #{lecturer.nickname}" if lecturer.nickname.present? %></span>
-                <% end %>
-							</div>
-						</td>
-						<td class="px-6 py-6 text-center">
-							<div class="flex items-center justify-center text-red-400 hover:text-purple-500">
-                <%= link_to owner_lecturer_path(lecturer.id), method: "delete", data: {confirm: "確認是否刪除？"} do %>
-                  <svg xmlns="http://www.w3./2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                  </svg>
-                <% end %>
-              </div>
-						</td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+                </div>
+              </td>
+              <td class="px-6 py-6 text-center">
+                <div class="flex items-center justify-center text-red-400 hover:text-purple-500">
+                      <%= link_to owner_lecturer_path(lecturer.id), method: "delete", data: {confirm: "確認是否刪除？"} do %>
+                        <svg xmlns="http://www.w3./2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      <% end %>
+                    </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 	</div>
 </div>

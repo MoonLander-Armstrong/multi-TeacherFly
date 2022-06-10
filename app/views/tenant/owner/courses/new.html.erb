@@ -9,7 +9,7 @@
     </div>
     <div class="p-8 bg-white border-2 border-gray-300 border-dashed rounded ">
       <div class="flex items-center justify-between mb-4" data-controller="image-label">
-       <div class="">課程圖片</div>
+       <div class="flex-shrink-0 mr-4">課程圖片</div>
         <%= form.label :image, class: "image-label relative block cursor-pointer w-11/12  right-1" do %>
           <div class="absolute inset-0 mx-auto text-white">
             <% if @course.image.attached? %>
