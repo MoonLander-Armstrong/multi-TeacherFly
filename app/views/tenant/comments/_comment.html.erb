@@ -12,7 +12,7 @@
           <% end %>
         <% else %>
           <% if comment.student.avatar.attached? %>
-            <%= iamge_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" %>
+            <%= image_tag url_for(comment.student.avatar), class: "w-full h-full object-cover" %>
           <% else %>
             <div class="flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-300 rounded-full md:w-20 md:h-20" data-image-label-target="fakeImg">
               <i class="text-2xl fa-solid fa-user"></i>
