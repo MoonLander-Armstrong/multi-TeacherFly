@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     scope module: "tenant" do
       root to: "courses#index", as: "teacher_root"
       get "teacher_auto_sign_in", to: "pages#auto_sign_in"
+      delete "teacher_auto_sign_out",to: "pages#auto_sign_out" 
       get "teacher_update_sign_in", to: "pages#update_sign_in"
       get "owner/preview", to: "courses#index"
       devise_for :students,
@@ -82,7 +83,7 @@ Rails.application.routes.draw do
       end
     end
   end
-
+  
   # without subdomain
   root to: 'pages#home'
   devise_for :teachers,
@@ -91,4 +92,7 @@ Rails.application.routes.draw do
                 sessions: 'teachers/sessions',
                 registrations: 'teachers/registrations'
               }
+  devise_scope :teacher do
+    get "teacher/log_out", to: "teachers/sessions#destroy"
+  end
 end

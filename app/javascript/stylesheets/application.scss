@@ -200,3 +200,7 @@ textarea {
   animation-fill-mode: forwards;
   animation-delay: calc(0.3s * var(--i));
 }
+
+.z-index99 {
+  z-index: 9999;
+}

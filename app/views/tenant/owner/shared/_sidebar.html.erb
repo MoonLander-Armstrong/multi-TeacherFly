@@ -1,4 +1,4 @@
-<div class="fixed inset-x-0 z-20 flex px-4 py-3 text-3xl md:inset-y-0 md:w-64 md:block bg-primary-300 md:overflow-scroll">
+<div class="fixed inset-x-0 z-50 flex px-4 py-3 text-3xl md:inset-y-0 md:w-64 md:block bg-primary-300 md:overflow-scroll z-index99">
   <label for="hamburger" class="md:hidden"><i class="fa-solid fa-bars"></i></label>
   <%= link_to edit_owner_schools_path do  %>
     <div class="hidden w-24 h-24 mx-auto my-8 overflow-hidden rounded-full md:block">
@@ -43,7 +43,7 @@
     </li>
     <li class="mx-4">
       <%= link_to owner_orders_path, data: { sidebar_style_target: "orders" } do %>
-        <i class="pr-1 fa-solid fa-cart-shopping"></i>訂單管理
+        <i class="mr-1 fa-solid fa-cart-shopping"></i>訂單管理
       <% end %>
     </li>
     <li class="mx-4">
@@ -54,6 +54,11 @@
     <li class="bottom-0 mx-4 mt-6 border-t border-black">
       <%= link_to owner_preview_path, target: "_blank" do %>
         <i class="fa-solid fa-house"></i>預覽首頁
+      <% end %>
+    </li>
+    <li class="mx-4">
+      <%= link_to teacher_auto_sign_out_path, method: :delete do %>
+        <i class="pr-1 fa-solid fa-right-from-bracket"></i>登出
       <% end %>
     </li>
   </ul>
