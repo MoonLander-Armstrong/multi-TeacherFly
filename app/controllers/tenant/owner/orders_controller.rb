@@ -4,7 +4,7 @@ class Tenant::Owner::OrdersController < Tenant::BaseController
   def index
     authorize :order
     @courses = Course.all
-    @orders = Order.includes(:student).where(course: @courses).paid.order(id: :desc)
+    @orders = Order.includes(:student).where(course: @courses).paid.order(created_at: :desc)
 
     if params[:days] && params[:days] != '0'
       @order_option = params[:days]
