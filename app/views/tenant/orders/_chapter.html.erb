@@ -1,6 +1,6 @@
-<ul class="my-8 rounded overflow-hidden text-primary-500">
-  <li class="px-8 py-3 bg-gray-300 text-2xl">
+<ul class="my-8 overflow-hidden rounded text-primary-500">
+  <li class="px-8 py-3 text-2xl bg-gray-300">
     <%= chapter.title %>
-    <%= render partial: "section", collection: chapter.sections %>
+    <%= render partial: "section", collection: chapter.sections.order(id: :asc) %>
   </li>
 </ul>
